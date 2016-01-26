@@ -12,11 +12,11 @@ package com.ucmo.chat;
 public class Test {
     
     public static void main(String[] args) throws Exception{
-        ActiveUsers.addUser("Brett", "Carty");
-        ActiveUsers.addUser("Jeff", "Trimmer");
-        ActiveUsers.addUser("John", "Brown");
-        ActiveUsers.addUser("Bob", "Smith");
-        ActiveUsers.addUser("Inglebert", "Humperdink");
+        ActiveUsers.addUser("VictoriaW", new User("VictoriaW"));
+        ActiveUsers.addUser("JeffT", new User("JeffT"));
+        ActiveUsers.addUser("MauricioB", new User("MauricioB"));
+        ActiveUsers.addUser("JessicaB", new User("JessicaB"));
+        ActiveUsers.addUser("EngelbertHumperdinck", new User("EngelbertHumperdinck"));
         
         System.out.println(ActiveUsers.getJsonString());
     }
