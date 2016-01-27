@@ -7,6 +7,7 @@ package com.ucmo.chat;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.InetAddress;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author jtrimmer
  */
-@WebServlet(name = "Server", urlPatterns = {"/Server"})
+@WebServlet(name = "Login", urlPatterns = {"/Login"})
 public class Login extends HttpServlet {
 
     /**
@@ -34,14 +35,23 @@ public class Login extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
+            
+            // get form parameters
+            String userName = request.getParameter("userName");
+            String IP = InetAddress.getLocalHost().getHostAddress();
+            String hostName = InetAddress.getLocalHost().getCanonicalHostName();
+            
+            // add user to online list
+            ActiveUsers.addUser(userName, new User(userName, IP, hostName));
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Server</title>");            
+            out.println("<title>Online Users</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Server at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Online Users</h1>");
+            out.println("<p>" + ActiveUsers.getJsonString() + "<p>");
             out.println("</body>");
             out.println("</html>");
         } finally {
