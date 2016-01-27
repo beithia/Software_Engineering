@@ -18,8 +18,10 @@
     </head>
     <body>
         <div class="container" >
-            <div style="margin-top:40px">
+            <div style="margin-top:40px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" >
+                
                 <img src ="CommerceBank.png" width="622" height = "107">
+                
             </div>
         </div>
         <div class="container">    
