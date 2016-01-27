@@ -37,7 +37,7 @@ public class Login extends HttpServlet {
         try {
             
             // get form parameters
-            String userName = request.getParameter("userName");
+            String userName = request.getParameter("username");
             String IP = InetAddress.getLocalHost().getHostAddress();
             String hostName = InetAddress.getLocalHost().getCanonicalHostName();
             

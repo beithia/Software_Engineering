@@ -8,11 +8,15 @@ package com.ucmo.chat;
 public class User implements java.io.Serializable{
     
     private String userName;
+    private String IPAddress;
+    private String hostName;
     
     public User(){}
     
-    public User(String userName){
-        this.userName = userName;
+    public User(String userName, String IPAddress, String hostName){
+        this.userName = userName;        
+        this.IPAddress = IPAddress;
+        this.hostName = hostName;
     }
 
     /**
@@ -28,4 +32,32 @@ public class User implements java.io.Serializable{
     public void setUserName(String userName) {
         this.userName = userName;
     }    
+
+    /**
+     * @return the IPAddress
+     */
+    public String getIPAddress() {
+        return IPAddress;
+    }
+
+    /**
+     * @param IPAddress the IPAddress to set
+     */
+    public void setIPAddress(String IPAddress) {
+        this.IPAddress = IPAddress;
+    }
+
+    /**
+     * @return the hostName
+     */
+    public String getHostName() {
+        return hostName;
+    }
+
+    /**
+     * @param hostName the hostName to set
+     */
+    public void setHostName(String hostName) {
+        this.hostName = hostName;
+    }
 }

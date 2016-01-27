@@ -1,7 +1,7 @@
 package com.ucmo.chat;
 
 import java.io.IOException;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentSkipListMap;
 import org.codehaus.jackson.map.ObjectMapper;
 
 /**
@@ -11,7 +11,7 @@ import org.codehaus.jackson.map.ObjectMapper;
  * A thread-safe collection of online user objects identified uniquely by the username. 
  */
 public class ActiveUsers {
-    private static final ConcurrentHashMap<String, User> users = new ConcurrentHashMap<>();
+    private static final ConcurrentSkipListMap<String, User> users = new ConcurrentSkipListMap<>();
     
     /**
      * Adds a user to the collection
@@ -48,7 +48,7 @@ public class ActiveUsers {
      */
     public static String getJsonString() throws IOException{
         ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.writeValueAsString(users.elements());
+        return objectMapper.writeValueAsString(users);
     }
     
 }
