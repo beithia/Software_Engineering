@@ -44,16 +44,7 @@ public class Login extends HttpServlet {
             // add user to online list
             ActiveUsers.addUser(userName, new User(userName, IP, hostName));
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Online Users</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Online Users</h1>");
-            out.println("<p>" + ActiveUsers.getJsonString() + "<p>");
-            out.println("</body>");
-            out.println("</html>");
+            response.sendRedirect(response.encodeRedirectURL("main.jsp"));
         } finally {
             out.close();
         }
