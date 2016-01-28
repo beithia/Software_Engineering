@@ -33,21 +33,15 @@ public class Login extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
-            
-            // get form parameters
-            String userName = request.getParameter("username");
-            String IP = InetAddress.getLocalHost().getHostAddress();
-            String hostName = InetAddress.getLocalHost().getCanonicalHostName();
-            
-            // add user to online list
-            ActiveUsers.addUser(userName, new User(userName, IP, hostName));
-            /* TODO output your page here. You may use following sample code. */
-            response.sendRedirect(response.encodeRedirectURL("main.jsp"));
-        } finally {
-            out.close();
-        }
+        // get form parameters
+        String userName = request.getParameter("username");
+        String IP = InetAddress.getLocalHost().getHostAddress();
+        String hostName = InetAddress.getLocalHost().getCanonicalHostName();
+
+        // add user to online list
+        ActiveUsers.addUser(new User(userName, IP, hostName));
+        /* TODO output your page here. You may use following sample code. */
+        response.sendRedirect(response.encodeRedirectURL("main.jsp"));
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

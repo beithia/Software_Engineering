@@ -1,44 +1,54 @@
 package com.ucmo.chat;
 
 import java.io.IOException;
-import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import org.codehaus.jackson.map.ObjectMapper;
 
 /**
  *
  * @author jtrimmer
  * 
- * A thread-safe collection of online user objects identified uniquely by the username. 
+ * A thread-safe collection of currently online user objects. 
  */
 public class ActiveUsers {
-    private static final ConcurrentSkipListMap<String, User> users = new ConcurrentSkipListMap<>();
+    private static final List users = Collections.synchronizedList(new ArrayList<User>());
     
     /**
-     * Adds a user to the collection
+     * Adds a user to the collection.
      * 
-     * @param userName - The unique identifier of the user. This is used when logging into the system.
-     * @param user  - The user object
+     * @param user  - The user object.
      */
-    public static void addUser(String userName, User user){
-        users.put(userName, user);
+    public static void addUser(User user){
+        users.add(user);
     }
     
     /**
      * Returns the user object corresponding to the userName parameter.
      * 
-     * @param userName - The unique identifier of the user. This is used when logging into the system.
+     * @param index - the specified position in this list.
      * @return - Returns the user object corresponding to the userName parameter.
      */
-    public static Object getUser(String userName){
-        return users.get(userName);
+    public static User getUser(int index){
+        return (User) users.get(index);
     }
     /**
      * Removes the user object corresponding to the userName parameter from the collection
      * 
-     * @param userName - The unique identifier of the user. This is used when logging into the system.
+     * @param index - the specified position in this list.
      */
-    public static void removeUser(String userName){
-        users.remove(userName);
+    public static void removeUser(int index){
+        users.remove(index);
+    }
+    
+    /**
+     * Removes the user object corresponding to the userName parameter from the collection
+     * 
+     * @param user - the User object.
+     */
+    public static void removeUser(User user){
+        users.remove(user);
     }
     
     /**
