@@ -5,18 +5,16 @@ package com.ucmo.chat;
  * 
  * @author jtrimmer
  */
-public class User implements java.io.Serializable{
+public class User implements java.io.Serializable, Comparable{
     
     private String userName;
     private String IPAddress;
-    private String hostName;
     
     public User(){}
     
-    public User(String userName, String IPAddress, String hostName){
+    public User(String userName, String IPAddress){
         this.userName = userName;        
         this.IPAddress = IPAddress;
-        this.hostName = hostName;
     }
 
     /**
@@ -47,17 +45,10 @@ public class User implements java.io.Serializable{
         this.IPAddress = IPAddress;
     }
 
-    /**
-     * @return the hostName
-     */
-    public String getHostName() {
-        return hostName;
-    }
-
-    /**
-     * @param hostName the hostName to set
-     */
-    public void setHostName(String hostName) {
-        this.hostName = hostName;
+    @Override
+    public int compareTo(Object anotherUser) {
+        if (!(anotherUser instanceof User)) throw new ClassCastException("A User object expected.");
+    String anotherPersonAge = ((User) anotherUser).getUserName();  
+    return this.getUserName().compareTo(anotherPersonAge);
     }
 }
