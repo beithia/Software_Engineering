@@ -36,7 +36,7 @@ public class ActiveUsers {
         return (User) users.get(index);
     }
     /**
-     * Removes the user object corresponding to the userName parameter from the collection
+     * Removes the user object corresponding to the supplied index number.
      * 
      * @param index - the specified position in this list.
      */
@@ -46,6 +46,21 @@ public class ActiveUsers {
     
     /**
      * Removes the user object corresponding to the userName parameter from the collection
+     * 
+     * @param userName - The unique identifier representing the individual user.
+     */
+    public static void removeUser(String userName){
+        for (int i = 0; i < users.size(); i++){
+            User user = (User)users.get(i);
+            if (user.getUserName().equals(userName)){
+                users.remove(i);
+                return;
+            }
+        }
+    }
+    
+    /**
+     * Removes the user object corresponding to the User object reference.
      * 
      * @param user - the User object.
      */
