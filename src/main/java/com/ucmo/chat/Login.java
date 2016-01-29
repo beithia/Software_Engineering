@@ -35,12 +35,11 @@ public class Login extends HttpServlet {
         // get form parameters
         String userName = request.getParameter("username");
         String IP = getClientIpAddress(request);
-        String hostName = InetAddress.getLocalHost().getCanonicalHostName();
 
         // add user to online list
         ActiveUsers.addUser(new User(userName, IP));
         /* TODO output your page here. You may use following sample code. */
-        response.sendRedirect(response.encodeRedirectURL("main.jsp"));
+        response.sendRedirect(response.encodeRedirectURL("main.jsp?userName=" + userName));
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
