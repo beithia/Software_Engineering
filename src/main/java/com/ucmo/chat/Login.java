@@ -6,7 +6,6 @@
 package com.ucmo.chat;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.InetAddress;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,11 +34,11 @@ public class Login extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         // get form parameters
         String userName = request.getParameter("username");
-        String IP = InetAddress.getLocalHost().getHostAddress();
+        String IP = getClientIpAddress(request);
         String hostName = InetAddress.getLocalHost().getCanonicalHostName();
 
         // add user to online list
-        ActiveUsers.addUser(new User(userName, IP, hostName));
+        ActiveUsers.addUser(new User(userName, IP));
         /* TODO output your page here. You may use following sample code. */
         response.sendRedirect(response.encodeRedirectURL("main.jsp"));
     }
@@ -82,5 +81,28 @@ public class Login extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+    
+    private static final String[] HEADERS_TO_TRY = { 
+    "X-Forwarded-For",
+    "Proxy-Client-IP",
+    "WL-Proxy-Client-IP",
+    "HTTP_X_FORWARDED_FOR",
+    "HTTP_X_FORWARDED",
+    "HTTP_X_CLUSTER_CLIENT_IP",
+    "HTTP_CLIENT_IP",
+    "HTTP_FORWARDED_FOR",
+    "HTTP_FORWARDED",
+    "HTTP_VIA",
+    "REMOTE_ADDR" };
+
+public static String getClientIpAddress(HttpServletRequest request) {
+    for (String header : HEADERS_TO_TRY) {
+        String ip = request.getHeader(header);
+        if (ip != null && ip.length() != 0 && !"unknown".equalsIgnoreCase(ip)) {
+            return ip;
+        }
+    }
+    return request.getRemoteAddr();
+}
 
 }

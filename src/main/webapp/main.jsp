@@ -4,6 +4,7 @@
     Author     : beithia
 --%>
 
+<%@page import="com.ucmo.chat.ActiveUsers"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,6 +14,11 @@
     </head>
     <body>
         
-        <%@ include file="header.html" %>        
+        <%@ include file="header.html" %>
+        <% for (int i = 0; i < ActiveUsers.Size(); i++){
+                out.println("<p>" + ActiveUsers.getUser(i).getUserName() 
+                        + ": IP = " + ActiveUsers.getUser(i).getIPAddress() + "</p>");
+            }
+        %>
     </body>
 </html>

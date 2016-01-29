@@ -60,5 +60,12 @@ public class ActiveUsers {
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.writeValueAsString(users);
     }
+
+    /**
+     * @return the users
+     */
+    public static int Size() {
+        return users.size();
+    }
     
 }
