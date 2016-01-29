@@ -1,5 +1,7 @@
 package com.ucmo.chat;
 
+import java.util.Objects;
+
 /**
  * An object representing the user.
  * 
@@ -50,5 +52,29 @@ public class User implements java.io.Serializable, Comparable{
         if (!(anotherUser instanceof User)) throw new ClassCastException("A User object expected.");
     String anotherPersonAge = ((User) anotherUser).getUserName();  
     return this.getUserName().compareTo(anotherPersonAge);
+    }
+    
+    @Override
+    public boolean equals(Object o){
+                
+        if (o == null) {
+        return false;
+    }
+    if (getClass() != o.getClass()) {
+        return false;
+    }
+    final User other = (User) o;
+    if ((this.userName == null) ? (other.userName != null) : !this.userName.equals(other.userName)) {
+        return false;
+    }
+    
+    return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 89 * hash + Objects.hashCode(this.userName);
+        return hash;
     }
 }

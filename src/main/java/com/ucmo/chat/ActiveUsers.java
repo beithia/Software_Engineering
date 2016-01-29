@@ -21,7 +21,9 @@ public class ActiveUsers {
      * @param user  - The user object.
      */
     public static void addUser(User user){
-        users.add(user);
+        if (!users.contains(user)){
+            users.add(user);
+        }
     }
     
     /**
