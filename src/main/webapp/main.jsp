@@ -37,8 +37,9 @@
         <%@ include file="header.html" %>
         
         <div class="container">
-            <% for (int i = 0; i < ActiveUsers.Size(); i++){
-                    out.println("<p style='font-size:24px'><span style='color:#037b58; font-size' class=' glyphicon glyphicon-user'></span> <a href='#' onclick=openChat()>" + ActiveUsers.getUser(i).getUserName() 
+            <%  String[] userNames = ActiveUsers.getUserNames();
+                for (int i = 0; i < userNames.length; i++){
+                    out.println("<p style='font-size:24px'><span style='color:#037b58; font-size' class=' glyphicon glyphicon-user'></span> <a href='#' onclick=openChat()>" + userNames[i]
                             + "</a></p>");
                 }
             %>
