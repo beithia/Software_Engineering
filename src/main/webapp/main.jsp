@@ -4,12 +4,13 @@
     Author     : beithia
 --%>
 
-<%@page import="com.ucmo.chat.ActiveUsers"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <% 
-    String userName = request.getParameter("userName");
-    
+    /* get the attributes from the request object that were delivered to this 
+    .jsp page from the login servlet. */
+    String userName = (String)request.getAttribute("userName");
+    String[] onlineUsers = (String[])request.getAttribute("onlineUsers");                  
 %>
 <html>
     <head>
@@ -36,16 +37,19 @@
     <body>
         <%@ include file="header.html" %>
         
-        <div class="container">
-            <%  String[] userNames = ActiveUsers.getUserNames();
-                for (int i = 0; i < userNames.length; i++){
-                    out.println("<p style='font-size:24px'><span style='color:#037b58; font-size' class=' glyphicon glyphicon-user'></span> <a href='#' onclick=openChat()>" + userNames[i]
-                            + "</a></p>");
-                }
-            %>
-            <p style="color:red; font-size:20px"> Logged user is: <%=userName %> </p>
+        <div class="container">            
+            <%  /* loop through the array of online user names and display them
+                on the page*/
+                for (int i = 0; i < onlineUsers.length; i++){ %>
+                <p style='font-size:24px'>
+                    <span style='color:#037b58; font-size' class=' glyphicon glyphicon-user'></span> 
+                    <a href='#' onclick=openChat()> <%= onlineUsers[i] %> </a>
+                </p>
+            <%  } %>
+            
+            <p style="color:red; font-size:20px"> Logged user is: <%= userName %> </p>
             <form name="logout" id="logout" action="logout.jsp">
-                <input type="hidden" id="userName" name="userName"  value=<%=userName%>>
+                <input type="hidden" id="userName" name="userName"  value="<%= userName %>">
                 <input class="btn btn-danger" type="submit" name="logout" id="logout" value="Logout">
                 <input type="hidden" name="visited" id="visited" value="" />
             </form>

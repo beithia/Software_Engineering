@@ -6,6 +6,7 @@
 package com.ucmo.chat;
 
 import java.io.IOException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * 
  * @author jtrimmer
  */
 @WebServlet(name = "Login", urlPatterns = {"/Login"})
@@ -31,14 +32,25 @@ public class Login extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
         // get form parameters
         String userName = request.getParameter("username");
         String IP = getClientIpAddress(request);
 
         // add user to online list
         ActiveUsers.addUser(new User(userName, IP));
-        /* TODO output your page here. You may use following sample code. */
-        response.sendRedirect(response.encodeRedirectURL("main.jsp?userName=" + userName));
+        
+        // Add attributes to the request object for the JSP to use.
+        request.setAttribute("userName", userName);
+        request.setAttribute("onlineUsers", ActiveUsers.getUserNames());
+        
+        // Instantiate a request dispatcher for the JSP.
+        RequestDispatcher view = request.getRequestDispatcher("main.jsp");
+        
+        // Use the request dispatcher to ask the Container to crank up the JSP, sending it the request and response.
+        view.forward(request, response);
+        
+        //response.sendRedirect(response.encodeRedirectURL("main.jsp?userName=" + userName));
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
