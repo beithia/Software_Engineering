@@ -49,7 +49,7 @@
             
             <p style="color:red; font-size:20px"> Logged user is: <%= userName %> </p>
             <form name="logout" id="logout" action="logout.jsp">
-                <input type="hidden" id="userName" name="userName"  value="<%= userName %>">
+                <input type="hidden" id="userName" name="username"  value="<%= userName %>">
                 <input class="btn btn-danger" type="submit" name="logout" id="logout" value="Logout">
                 <input type="hidden" name="visited" id="visited" value="" />
             </form>
