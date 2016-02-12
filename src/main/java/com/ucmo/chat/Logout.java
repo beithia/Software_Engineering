@@ -43,7 +43,7 @@ public class Logout extends HttpServlet {
         // Instantiate a request dispatcher for the JSP.
         RequestDispatcher view = request.getRequestDispatcher("index.jsp");
         
-        // Use the request dispatcher to ask the Container to crank up the JSP, sending it the request and response.
+        // Forwards a request from this servlet to index.jsp.
         view.forward(request, response);
     }
 
