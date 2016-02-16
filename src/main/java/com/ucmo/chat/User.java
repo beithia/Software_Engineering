@@ -1,6 +1,8 @@
 package com.ucmo.chat;
 
 import java.util.Objects;
+import java.util.Timer;
+import javax.websocket.Session;
 
 /**
  * An object representing the user.
@@ -11,12 +13,20 @@ public class User implements java.io.Serializable, Comparable{
     
     private String userName;
     private String IPAddress;
+    private Session session;
+    private Timer timer;
     
     public User(){}
     
     public User(String userName, String IPAddress){
         this.userName = userName;        
         this.IPAddress = IPAddress;
+    }
+    
+    public User(String userName, Session session){
+        this.userName = userName;        
+        this.session = session;
+        //this.timer.schedule(null, delay);
     }
 
     /**
@@ -76,5 +86,33 @@ public class User implements java.io.Serializable, Comparable{
         int hash = 5;
         hash = 89 * hash + Objects.hashCode(this.userName);
         return hash;
+    }
+
+    /**
+     * @return the session
+     */
+    public Session getSession() {
+        return session;
+    }
+
+    /**
+     * @param session the session to set
+     */
+    public void setSession(Session session) {
+        this.session = session;
+    }
+
+    /**
+     * @return the timer
+     */
+    public Timer getTimer() {
+        return timer;
+    }
+
+    /**
+     * @param timer the timer to set
+     */
+    public void setTimer(Timer timer) {
+        this.timer = timer;
     }
 }
