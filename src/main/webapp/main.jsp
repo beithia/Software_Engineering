@@ -23,7 +23,7 @@
                 xhttp.open("POST", "logout.jsp?userName=" + userName, true);
                 xhttp.send();
                 //response.sendRedirect("index.jsp");
-                return "This will Log you out"
+                return "This will Log you out";
             };
             var windowObjectReference;
             
