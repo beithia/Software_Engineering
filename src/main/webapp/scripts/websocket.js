@@ -2,23 +2,23 @@ var socket = new WebSocket("ws://localhost:8080/Chat/controller");
 socket.onmessage = onMessage;
 
 function onMessage(event) {    
-    alert(event);
+    alert("event");
 }
 
 function sendLogin(element) {
-    var JsonMessage = {
+    var DeviceAction = {
         action: "login",
-	username: element
+	username: "randomUser"
     };
-    socket.send(JSON.stringify(JsonMessage));
+    socket.send(JSON.stringify(DeviceAction));
 }
 
 function sendLogout(element) {
-    var JsonMessage = {
+    var DeviceAction = {
         action: "logout",
-	username: element
+	username: "randomUser"
     };
-    socket.send(JSON.stringify(JsonMessage));
+    socket.send(JSON.stringify(DeviceAction));
 }
 
 
