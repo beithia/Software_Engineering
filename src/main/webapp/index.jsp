@@ -32,10 +32,11 @@
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                                 <input id="login-password" type="password" class="form-control" name="password" >
                             </div>
-                            <div style="margin-top:10px" class="input-group">
-                                <input class = "form-control" type="submit" value ="Login">
-                            </div>
+                            
                         </form>  
+                        <div style="margin-top:10px" class="input-group">
+                            <button class = "form-control" value ="Login" onclick="sendLogin('Jeff')">Login</button>
+                         </div>
                     </div>
                 </div>
             </div>
