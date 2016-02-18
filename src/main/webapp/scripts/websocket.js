@@ -3,8 +3,13 @@ socket.onmessage = onMessage;
 
 function onMessage(event) {
     alert(event.data);
+    if(event.data === "login") {
+        window.location.replace("main.jsp");
+    }
+    else if(event.data === "logout") {
+        window.location.replace("index.jsp");
+    }
 }
-
 function sendLogin(element) {
     alert("working");    
     var DeviceAction = {

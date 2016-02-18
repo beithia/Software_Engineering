@@ -38,21 +38,21 @@
         <%@ include file="header.html" %>
         
         <div class="container">            
-            <%  /* loop through the array of online user names and display them
-                on the page*/
-                for (int i = 0; i < onlineUsers.length; i++){ %>
+            <!---loop through the array of online user names and display them
+                on the page--->
+                
                 <p style='font-size:24px'>
                     <span style='color:#037b58; font-size' class=' glyphicon glyphicon-user'></span> 
-                    <a href='#' onclick=openChat()> <%= onlineUsers[i] %> </a>
+                    
                 </p>
-            <%  } %>
             
-            <p style="color:red; font-size:20px"> Logged user is: <%= userName %> </p>
+            
+            <p style="color:red; font-size:20px"> Logged user is: </p>
             <form name="logout" id="logout" action="logout.jsp">
-                <input type="hidden" id="userName" name="username"  value="<%= userName %>">
-                <input class="btn btn-danger" type="submit" name="logout" id="logout" value="Logout">
+                <input type="hidden" id="userName" name="username"  value="">
                 <input type="hidden" name="visited" id="visited" value="" />
             </form>
+                <button class="btn btn-danger" name="logout" id="logout" onclick="sendLogout('Jeff')">Logout</button>
         </div>
                 
     </body>
