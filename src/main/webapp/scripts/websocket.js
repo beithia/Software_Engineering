@@ -10,8 +10,7 @@ function onMessage(event) {
         window.location.replace("index.jsp");
     }
 }
-function sendLogin(element) {
-    alert("working");    
+function sendLogin(element) {   
     var DeviceAction = {
         action: "login",
 	username: element
