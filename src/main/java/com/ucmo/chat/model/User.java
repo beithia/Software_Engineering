@@ -1,4 +1,4 @@
-package com.ucmo.chat;
+package com.ucmo.chat.model;
 
 import java.util.Objects;
 import java.util.Timer;

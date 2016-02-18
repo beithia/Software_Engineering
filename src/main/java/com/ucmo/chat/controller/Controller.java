@@ -1,7 +1,9 @@
-package com.ucmo.chat;
+package com.ucmo.chat.controller;
 
+import com.ucmo.chat.beans.JsonMessage;
+import com.ucmo.chat.model.ActiveUsers;
+import com.ucmo.chat.model.User;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.websocket.*;
@@ -33,18 +35,23 @@ public class Controller {
     @OnMessage
     public void handleMessage(String message, Session session) {
         try {
-            HashMap<String,Object> jsonMessage = new ObjectMapper().readValue(message, HashMap.class);
-            if (((String)jsonMessage.get("action")).equals("login")) {
-                String username = (String)jsonMessage.get("username");
+            
+            JsonMessage jsonMessage = new ObjectMapper().readValue(message, JsonMessage.class);
+            if (jsonMessage.getAction().equals("login")) {
+                String username = jsonMessage.getData()[0];
                 ActiveUsers.addUser(new User(username, session));
+                JsonMessage send = new JsonMessage("usernames", ActiveUsers.getUserNames());
+                ObjectMapper objectMapper = new ObjectMapper();
+                String strSend = objectMapper.writeValueAsString(send);
+                System.out.println(send);
                 try {
-                    session.getBasicRemote().sendText("login");
+                    session.getBasicRemote().sendText(strSend);
                 } catch (IOException ex) {
                     Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, "Failed to send login reply", ex);
                 }
             }
-            if (((String)jsonMessage.get("action")).equals("logout")) {
-                String username = (String)jsonMessage.get("username");
+            if (jsonMessage.getAction().equals("logout")) {
+                String username = (String)jsonMessage.getData()[0];
                 ActiveUsers.removeUser(username);
                 try {
                     session.getBasicRemote().sendText("logout");
