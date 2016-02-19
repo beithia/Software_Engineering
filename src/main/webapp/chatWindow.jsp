@@ -29,25 +29,32 @@
                                 <textarea id="message" style="resize:none" draggable="false" class="form-control" rows="2" wrap="hard"> </textarea>
                                 <span class="input-group-addon"><input id="btnSend" class = "form-control btn btn-primary" type="button" value='Send'></input> </span> 
                             </div>
+                            <div>
+                                <input type="checkbox" id="sendOnEnter"> Send message on Enter </input>
+                            </div>
                            <%-- <div style="margin-top:5px" class="input-group pull-right">
                                 <input id="btnSend" class = "form-control btn btn-primary" type="button" value='Send'></input>  
                             </div> --%>
                             <script>
-                                <%-- add event listener to send button --%>
-                                document.getElementById("btnSend").addEventListener("click", addMessage);
-
+                                
                                 <%-- adds message from text box to messageArea div --%>
-                                function addMessage(){
-                                    var element = document.createElement("P");
-                                    var text = document.getElementById("message");
-                                    var node = document.createTextNode("You: " + text.value);
-                                    element.appendChild(node);
-                                    document.getElementById("messageArea").appendChild(element);  
-                                    document.getElementById("message").value = "";
-                                    <%-- force messageArea div to scroll to bottom --%>
-                                    var objDiv = document.getElementById("messageArea");
-                                    objDiv.scrollTop = objDiv.scrollHeight;
-                                }
+                                var addMessage = function() {
+                                    if ($("#message").val().trim()){
+                                        var p = $("<p></p>");
+                                        p.html("<b>You: </b>" + $("#message").val());
+                                        $("#messageArea").append(p);
+                                        $("#message").val("");
+                                        <%-- force messageArea div to scroll to bottom --%>
+                                        var objDiv = document.getElementById("messageArea");
+                                        objDiv.scrollTop = objDiv.scrollHeight;
+                                    }
+                                };
+                                $("#btnSend").click(addMessage);
+                                $("#message").keydown(function(e){
+                                    if (e.keyCode === 13 && $("#sendOnEnter").is(":checked")){
+                                        addMessage();
+                                    }
+                                });
                             </script>
                         </form>  
                     </div>
