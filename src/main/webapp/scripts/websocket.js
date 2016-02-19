@@ -13,17 +13,22 @@ function onMessage(event) {
         window.location.replace("index.jsp");
     }
     else if(receivedMessage.action === "usernames") {
-        alert(receivedMessage.data[0]);
+        for(i = 0; i < receivedMessage.data.length; i++) {
+            alert(receivedMessage.data[i]);
+        }
+        window.location.replace("main.jsp");
     }
 }
 
 // Sends the login signal message
-function sendLogin(element) {   
-    var DeviceAction = {
+function sendLogin() { 
+    var username = document.getElementById('username').value;
+    //alert(username);
+    var UserObject = {
         action: "login",
-	data: [element]
+	data: [username]
     };
-    socket.send(JSON.stringify(DeviceAction));
+    socket.send(JSON.stringify(UserObject));
 }
 
 // Sends the logout signal message
@@ -32,7 +37,7 @@ function sendLogout(element) {
         action: "logout",
 	data: [element]
     };
-    socket.send(JSON.stringify(DeviceAction));
+    socket.send(JSON.stringify(UserObject));
 }
 
 

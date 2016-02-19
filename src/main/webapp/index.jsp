@@ -35,7 +35,7 @@
                             
                         </form>  
                         <div style="margin-top:10px" class="input-group">
-                            <button class = "form-control" value ="Login" onclick="sendLogin('Jeff')">Login</button>
+                            <button id="username" class = "form-control" value ="Login" onclick="sendLogin()">Login</button>
                          </div>
                     </div>
                 </div>
