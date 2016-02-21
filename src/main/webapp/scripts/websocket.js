@@ -13,10 +13,11 @@ function onMessage(event) {
         window.location.replace("index.jsp");
     }
     else if(receivedMessage.action === "usernames") {
-        for(i = 0; i < receivedMessage.data.length; i++) {
+        /*for(i = 0; i < receivedMessage.data.length; i++) {
             alert(receivedMessage.data[i]);
-        }
-        window.location.replace("main.jsp");
+        }*/
+        getUsers(receivedMessage.data);
+        //window.location.replace("main.jsp");
     }
 }
 
@@ -39,5 +40,7 @@ function sendLogout(element) {
     };
     socket.send(JSON.stringify(UserObject));
 }
+
+
 
 
