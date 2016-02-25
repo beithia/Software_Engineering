@@ -59,6 +59,19 @@ public class Controller {
                     Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, "Failed to send logout reply", ex);
                 }
             }
+            
+            //Test case for heartbeat. 
+            if (jsonMessage.getAction().equals("heartbeat")) {
+                String[] testMsg = {(String)jsonMessage.getData()[0]};
+                JsonMessage send = new JsonMessage("heartbeat", testMsg);
+                ObjectMapper objectMapper = new ObjectMapper();
+                String strSend = objectMapper.writeValueAsString(send);
+                try {
+                    session.getBasicRemote().sendText(strSend);
+                } catch (IOException ex) {
+                    Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, "Failed to send logout reply", ex);
+                }
+            }
         } catch (IOException ex) {
             try {
                 Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);

@@ -10,21 +10,30 @@ function onMessage(event) {
         window.location.replace("main.jsp");
     }
     else if(receivedMessage.action === "logout") {
-        window.location.replace("index.jsp");
+        alert(receivedMessage.data);
     }
     else if(receivedMessage.action === "usernames") {
-        /*for(i = 0; i < receivedMessage.data.length; i++) {
-            alert(receivedMessage.data[i]);
-        }*/
         getUsers(receivedMessage.data);
-        //window.location.replace("main.jsp");
     }
+    else if(receivedMessage.action === "heartbeat") {
+        console.log(receivedMessage.data);
+    }
+    
+}
+
+//Sends the heartbeat signal message
+function sendHeartbeat() {
+    var username = document.getElementById('username').value;
+    var pulse = {
+        action: "heartbeat",
+        data: [username]
+    };
+    socket.send(JSON.stringify(pulse));
 }
 
 // Sends the login signal message
-function sendLogin() { 
+function sendLogin() {
     var username = document.getElementById('username').value;
-    //alert(username);
     var UserObject = {
         action: "login",
 	data: [username]
@@ -38,7 +47,7 @@ function sendLogout(element) {
         action: "logout",
 	data: [element]
     };
-    socket.send(JSON.stringify(UserObject));
+    socket.send(JSON.stringify(DeviceAction));
 }
 
 

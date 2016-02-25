@@ -1,13 +1,16 @@
+//Heartbeat funtion. It makes a call to the server every 5 seconds to keep connection alive.
+function heartbeat() {
+    window.setInterval(sendHeartbeat, 5000); 
+ }
 
+//getUsers function. It fills div in main.jsp with the latest list of logged users.
  function getUsers(usersArray) {
    var loginDiv = document.getElementById("loginDiv");
    var usersDiv = document.getElementById("usersDiv");
    var mainDiv = document.getElementById("mainDiv");
    loginDiv.style.display = "none";
    mainDiv.style.display = "block";
-   console.log(usersArray);
-   
-   for(i = 1; i < usersArray.length; i++) {
+   for(i = 0; i < usersArray.length; i++) {
         var a = document.createElement("a"); 
         var p = document.createElement("P");
         var span = document.createElement("span");
@@ -21,8 +24,11 @@
         p.appendChild(user);
         a.appendChild(p);
         usersDiv.appendChild(a);
+        heartbeat();
     }
  }
+ 
+ 
 
 
 

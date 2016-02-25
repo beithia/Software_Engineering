@@ -35,7 +35,7 @@
         <input type="hidden" name="visited" id="visited" value="" />
     </form>
     <br><br>
-    <button class="btn btn-danger" name="logout" id="logout" onclick="sendLogout('Jeff')">Logout</button>
+    <button class="btn btn-danger" name="logout" id="logout">Logout</button>
 </div>
                 
    
