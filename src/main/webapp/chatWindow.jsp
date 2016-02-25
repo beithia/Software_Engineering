@@ -35,7 +35,7 @@
                            <%-- <div style="margin-top:5px" class="input-group pull-right">
                                 <input id="btnSend" class = "form-control btn btn-primary" type="button" value='Send'></input>  
                             </div> --%>
-                            <script type = "text/javascript">
+                            <script>
                                 
                                 <%-- adds message from text box to messageArea div --%>
                                 var addMessage = function() {
