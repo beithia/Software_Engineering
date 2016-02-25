@@ -28,7 +28,8 @@ function sendHeartbeat() {
         action: "heartbeat",
         data: [username]
     };
-    socket.send(JSON.stringify(pulse));
+    socket.send(JSON.stringify(pulse));    
+    console.log("heartbeat sent");
 }
 
 // Sends the login signal message
