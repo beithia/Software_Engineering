@@ -28,8 +28,7 @@ function sendHeartbeat() {
         action: "heartbeat",
         data: [username]
     };
-    socket.send(JSON.stringify(pulse));    
-    console.log("heartbeat sent");
+    socket.send(JSON.stringify(pulse));
 }
 
 // Sends the login signal message
@@ -39,7 +38,8 @@ function sendLogin() {
         action: "login",
 	data: [username]
     };
-    socket.send(JSON.stringify(UserObject));
+    socket.send(JSON.stringify(UserObject));             
+    heartbeat();
 }
 
 // Sends the logout signal message

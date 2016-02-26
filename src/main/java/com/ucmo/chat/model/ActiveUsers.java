@@ -2,13 +2,13 @@ package com.ucmo.chat.model;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Enumeration;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import org.codehaus.jackson.map.ObjectMapper;
 
 /**
- * A thread-safe collection of currently online user objects. 
- * @author jtrimmer
+ * A thread-safe collection of currently online user objects.
+ * @author Jeff Trimmer
  */
 public class ActiveUsers {
     private static final ConcurrentHashMap<String, User> users = new ConcurrentHashMap<>();
@@ -18,23 +18,23 @@ public class ActiveUsers {
      * @param user  - The user object.
      */
     public static void addUser(User user){
-        users.put(user.getUserName(),user);
+        users.put(user.getUsername(),user);
     }
     
     /**
      * Returns the user object corresponding to the userName parameter.
-     * @param userName - the user name corresponding to the user object.
+     * @param username - the user name corresponding to the user object.
      * @return - Returns the user object corresponding to the userName parameter.
      */
-    public static User getUser(String userName){
-        return users.get(userName);
+    public static User getUser(String username){
+        return users.get(username);
     }
     
     /**
      * Returns a string array containing all the user names in alphabetic order.
      * @return - Returns  a string array containing the set of online user names in alphabetic order.
      */
-    public static String[] getUserNames(){
+    public static String[] getUsernames(){
         Set keys = users.keySet();
         String[] keyArray = (String[]) keys.toArray(new String[keys.size()]);
         Arrays.sort(keyArray);
@@ -47,17 +47,7 @@ public class ActiveUsers {
      */
     public static void removeUser(String userName){
         users.remove(userName);
-    }
-    
-    /**
-     * Returns the collection of online users in JSON form.
-     * @return - The collection of online users in JSON form.
-     * @throws IOException 
-     */
-    public static String getJsonString() throws IOException{
-        ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.writeValueAsString(users);
-    }
+    }    
 
     /**
      * Returns an integer value of the collection element count.
@@ -75,6 +65,17 @@ public class ActiveUsers {
      */
     public static boolean containsUser(String userName){
         return users.containsKey(userName);
+    }
+    
+    /**
+     * Sends a text message to all the active users blocking until all of the message has been transmitted.
+     * @param message - The message to send
+     * @throws IOException - if there is a problem delivering the message.
+     */
+    public static void broadcast(String message) throws IOException{
+        for (Enumeration<User> e = users.elements(); e.hasMoreElements();) {
+            e.nextElement().getSession().getBasicRemote().sendText(message);
+        }
     }
     
 }

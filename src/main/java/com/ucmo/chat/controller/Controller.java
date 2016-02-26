@@ -6,32 +6,53 @@ import com.ucmo.chat.model.User;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.websocket.*;
+import javax.websocket.OnClose;
+import javax.websocket.OnError;
+import javax.websocket.OnMessage;
+import javax.websocket.OnOpen;
+import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 import org.codehaus.jackson.map.ObjectMapper;
 
 /**
  * Controls and manages incoming and outgoing messages sent between all clients and the server. 
- * @author jtrimmer
+ * @author Jeff Trimmer
  */
 @ServerEndpoint("/controller")
 public class Controller {
     
+    /**
+     * Notifies when a new webSocket has just begun.
+     * @param session - the session that has just been activated.
+     */
     @OnOpen
     public void open(Session session) {
         Logger.getLogger(Controller.class.getName()).log(Level.INFO, "Session {0} opened", session.getId());
     }
 
+    /**
+     * This method is called immediately prior to the session with the remote peer being closed. It is called whether the session is being closed because the remote peer initiated a close and sent a close frame, or whether the local webSocket container or this endpoint requests to close the session.
+     * @param session - the session about to be closed.
+     */
     @OnClose
     public void close(Session session) {
         Logger.getLogger(Controller.class.getName()).log(Level.INFO, "Session {0} closed", session.getId());
     }
 
+    /**
+     * Notifies when the web socket session creates some kind of error that is not modeled in the web socket protocol.
+     * @param error - the throwable representing the problem.
+     */
     @OnError
     public void onError(Throwable error) {
         Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, "Error: {0}", error.getLocalizedMessage());
     }
 
+    /**
+     * Used to select an appropriate method which is called once a new message is received.
+     * @param message - the JSON message received.
+     * @param session - the session from which the message is received.
+     */
     @OnMessage
     public void handleMessage(String message, Session session) {
         try {
@@ -40,45 +61,25 @@ public class Controller {
             if (jsonMessage.getAction().equals("login")) {
                 String username = jsonMessage.getData()[0];
                 ActiveUsers.addUser(new User(username, session));
-                JsonMessage send = new JsonMessage("usernames", ActiveUsers.getUserNames());
+                JsonMessage send = new JsonMessage("usernames", ActiveUsers.getUsernames());
                 ObjectMapper objectMapper = new ObjectMapper();
                 String strSend = objectMapper.writeValueAsString(send);
-                System.out.println(send);
-                try {
-                    session.getBasicRemote().sendText(strSend);
-                } catch (IOException ex) {
-                    Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, "Failed to send login reply", ex);
-                }
+                ActiveUsers.broadcast(strSend);
             }
             if (jsonMessage.getAction().equals("logout")) {
                 String username = (String)jsonMessage.getData()[0];
                 ActiveUsers.removeUser(username);
-                try {
-                    session.getBasicRemote().sendText("logout");
-                } catch (IOException ex) {
-                    Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, "Failed to send logout reply", ex);
-                }
-            }
-            
-            //Test case for heartbeat. 
-            if (jsonMessage.getAction().equals("heartbeat")) {
-                String[] testMsg = {(String)jsonMessage.getData()[0]};
-                JsonMessage send = new JsonMessage("heartbeat", testMsg);
+                JsonMessage send = new JsonMessage("usernames", ActiveUsers.getUsernames());
                 ObjectMapper objectMapper = new ObjectMapper();
                 String strSend = objectMapper.writeValueAsString(send);
-                try {
-                    session.getBasicRemote().sendText(strSend);
-                } catch (IOException ex) {
-                    Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, "Failed to send logout reply", ex);
-                }
+                ActiveUsers.broadcast(strSend);
+            }                        
+            if (jsonMessage.getAction().equals("heartbeat")) {
+                String username = jsonMessage.getData()[0];
+                ActiveUsers.getUser(username).resetTimer();
             }
         } catch (IOException ex) {
-            try {
-                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-                session.getBasicRemote().sendText(ex.getMessage());
-            } catch (IOException ex1) {
-                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, "Could not send message", ex1);
-            }
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);         
         }
     }
 }

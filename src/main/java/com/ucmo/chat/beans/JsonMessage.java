@@ -2,6 +2,12 @@ package com.ucmo.chat.beans;
 
 import java.io.Serializable;
 
+/**
+ * A JsonMessage represents the object form of the incoming JSON String message. 
+ * The incoming JSON string is parsed and values are populated to the instance 
+ * variables when this class is instantiated.
+ * @author jtrimmer
+ */
 public class JsonMessage implements Serializable{
     private String action;
     private String[] data;
