@@ -11,7 +11,8 @@
 
         
 <script>
-   window.onbeforeunload = function(e) {
+   /*
+     window.onbeforeunload = function(e) {
         var userName = document.getElementById("userName").value;
         var xhttp = new XMLHttpRequest();
         xhttp.open("POST", "logout.jsp?userName=" + userName, true);
@@ -19,8 +20,9 @@
         //response.sendRedirect("index.jsp");
         return "This will Log you out";
     };
+    */
     var windowObjectReference;
-
+    
 
     function openChat() {
 
@@ -35,7 +37,8 @@
         <input type="hidden" name="visited" id="visited" value="" />
     </form>
     <br><br>
-    <button class="btn btn-danger" name="logout" id="logout">Logout</button>
+    <p id="test"></p>
+    <button class="btn btn-danger" name="logout" id="logout" onclick="sendLogout()">Logout</button>
 </div>
                 
    

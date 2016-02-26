@@ -9,9 +9,6 @@ function onMessage(event) {
     if(receivedMessage.action === "login") {
         window.location.replace("main.jsp");
     }
-    else if(receivedMessage.action === "logout") {
-        alert(receivedMessage.data);
-    }
     else if(receivedMessage.action === "usernames") {
         getUsers(receivedMessage.data);
     }
@@ -43,12 +40,14 @@ function sendLogin() {
 }
 
 // Sends the logout signal message
-function sendLogout(element) {
+function sendLogout() {
+    var username = document.getElementById('username').value;
     var DeviceAction = {
         action: "logout",
-	data: [element]
+	data: [username]
     };
     socket.send(JSON.stringify(DeviceAction));
+    window.location.replace("index.jsp");
 }
 
 
