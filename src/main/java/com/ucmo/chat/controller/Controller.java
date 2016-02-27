@@ -116,6 +116,13 @@ public class Controller {
                         chatRoom.sendMessage(strSend);
                         break;
                     }
+                default:
+                    Logger.getLogger(Controller.class.getName()).log(
+                        Level.WARNING, 
+                        "Received an unknown message action: {0}", 
+                        jsonMessage.getAction()
+                    );
+                    break;
             }
         } catch (IOException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);         
