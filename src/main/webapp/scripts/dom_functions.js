@@ -2,6 +2,10 @@
 function heartbeat() {
     window.setInterval(sendHeartbeat, 1250);
  }
+ 
+ function getName() {
+     alert(document.getElementById("Mauricio").data('value'));
+ }
 
 //getUsers function. It fills div in main.jsp with the latest list of logged users.
  function getUsers(usersArray) {
@@ -16,10 +20,13 @@ function heartbeat() {
    mainDiv.style.display = "block";
    for(i = 0; i < usersArray.length; i++) {
         var a = document.createElement("a"); 
-        var p = document.createElement("P");
+        a.setAttribute("id", usersArray[i]);
+        a.setAttribute("data-value", usersArray[i]);
+        a.setAttribute("onclick", "getName()");
+        var p = document.createElement("p");
         var span = document.createElement("span");
         var user = document.createTextNode(" " + usersArray[i]);
-        a.href = 'chatWindow.jsp';
+        //a.href = 'chatWindow.jsp';
         a.style.cssText = "text-decoration:none";
         p.style.cssText = "font-size:24px";
         span.style.cssText = "color:#037b58";
