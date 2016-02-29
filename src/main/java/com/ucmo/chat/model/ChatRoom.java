@@ -5,17 +5,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class ChatRoom {
     private ConcurrentHashMap<String, User> users = new ConcurrentHashMap();
     private ArrayList<String> messages = new ArrayList();
-    private int chatRoomID;
+    private UUID chatRoomID;
 
     public ChatRoom() {}
 
-    public ChatRoom(int chatRoomID, User user1, User user2) {
-        this.chatRoomID = chatRoomID;
+    public ChatRoom(User user1, User user2) {
+        this.chatRoomID = UUID.randomUUID();
         users.put(user1.getUsername(), user1);
         users.put(user2.getUsername(), user2);
     }
@@ -63,16 +64,15 @@ public class ChatRoom {
         }
     }
 
-    public void setChatRoomID(int ID) {
-        chatRoomID = ID;
-    }
-
-    public int getChatRoomID() {
-        return chatRoomID;
-    }
-
     public int messageCount() {
         return messages.size();
+    }
+
+    /**
+     * @return the chatRoomID
+     */
+    public String getChatRoomID() {
+        return chatRoomID.toString();
     }
 }
 
