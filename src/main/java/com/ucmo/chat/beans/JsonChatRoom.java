@@ -8,13 +8,13 @@ import java.io.Serializable;
  */
 public class JsonChatRoom implements Serializable {
     private String action;
-    private int ID;
+    private String ID;
     private String[] users;
     private String[] messages;
     
     public JsonChatRoom(){}
     
-    public JsonChatRoom(String action, int ID, String[] users, String[] messages){
+    public JsonChatRoom(String action, String ID, String[] users, String[] messages){
         this.action = action;
         this.ID = ID;
         this.users = users;
@@ -38,14 +38,14 @@ public class JsonChatRoom implements Serializable {
     /**
      * @return the ID
      */
-    public int getID() {
+    public String getID() {
         return ID;
     }
 
     /**
      * @param ID the ID to set
      */
-    public void setID(int ID) {
+    public void setID(String ID) {
         this.ID = ID;
     }
 

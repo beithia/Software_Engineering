@@ -98,16 +98,14 @@ public class Controller {
                     {
                         String username1 = jsonMessage.getData()[0];
                         String username2 = jsonMessage.getData()[1];
-                        int newChatID = ActiveChatRooms.nextID();
                         ChatRoom chatRoom = new ChatRoom(
-                            newChatID,
                             ActiveUsers.getUser(username1),
                             ActiveUsers.getUser(username2)
                         );
                         ActiveChatRooms.addChatRoom(chatRoom.getChatRoomID(), chatRoom);
                         JsonChatRoom jsonChatRoom = new JsonChatRoom(
                             "newChat",
-                            newChatID,
+                            chatRoom.getChatRoomID(),
                             chatRoom.getUsernames(),
                             chatRoom.getMessages()
                         );
@@ -116,6 +114,13 @@ public class Controller {
                         chatRoom.sendMessage(strSend);
                         break;
                     }
+                default:
+                    Logger.getLogger(Controller.class.getName()).log(
+                        Level.WARNING, 
+                        "Received an unknown message action: {0}", 
+                        jsonMessage.getAction()
+                    );
+                    break;
             }
         } catch (IOException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);         
