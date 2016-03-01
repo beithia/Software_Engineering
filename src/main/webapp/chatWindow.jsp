@@ -21,13 +21,16 @@
         <!--%@ include file="header.html" %-->
         <div class="container"> 
             <div style="margin-top:60px;" class="mainbox col-md-7 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
-                <div class="panel panel-info " id ="draggable">
+                <div class="panel panel-info " id ="draggable" style="max-height: 400px;">
                     <div class=" panel-heading ">
-                        <div id="title" class="panel-title"> Chatting with: </div>
+                        <div id="title" class="panel-title"> Chatting with: 
+                         <button id="close" class="btn btn-xs pull-right"style>x</button><button id="minimize" class="btn btn-xs pull-right">-</button>
+                        </div>
                     </div>                   
                     <div id="chatwindow" style="padding-top:10px" class="panel-body" >
                         <form id="chatform" class="form-vertical" role="form">
-                            <div id="activeusers" style="border:solid 1px; margin-top:5px; margin-bottom:5px; margin-right:10px; height:285px; max-height:285px; overflow-y:auto" class ="panel-body col-sm-3"> 
+                            
+                            <div id="activeusers" style="border:solid 1px; margin-top:5px; margin-bottom:5px; margin-right:10px; height:285px; max-height:285px; width:100px; overflow-y:auto" class ="panel-body col-sm-3"> 
                             <%-- names of active users --%>
                             </div>   
                             <div id ="messageArea"  style="margin-bottom:10px; height:200px; max-height:200px; overflow-y:auto">
