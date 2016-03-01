@@ -40,8 +40,8 @@ public class JsonMessage implements Serializable{
     /**
      * @return the data
      */
-    public String[] getData() {
-        return data;
+    public String getData(int index) {
+        return data[index];
     }
 
     /**
