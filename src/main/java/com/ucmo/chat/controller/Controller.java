@@ -64,13 +64,13 @@ public class Controller {
             switch (jsonMessage.getAction()) {
                 case "heartbeat":
                     {
-                        String username = jsonMessage.getData(0);
+                        String username = jsonMessage.getData()[0];
                         ActiveUsers.getUser(username).resetTimer();
                         break;
                     }
                 case "login":
                     {
-                        String username = jsonMessage.getData(0);
+                        String username = jsonMessage.getData()[0];
                         ActiveUsers.addUser(new User(username, session));
                         JsonMessage send = new JsonMessage(
                                 "usernames", 
@@ -83,7 +83,7 @@ public class Controller {
                     }
                 case "logout":
                     {
-                        String username = jsonMessage.getData(0);
+                        String username = (String)jsonMessage.getData()[0];
                         ActiveUsers.removeUser(username);
                         JsonMessage send = new JsonMessage(
                                 "usernames", 
@@ -96,8 +96,8 @@ public class Controller {
                     }
                 case "newChat":
                     {
-                        String username1 = jsonMessage.getData(0);
-                        String username2 = jsonMessage.getData(1);
+                        String username1 = jsonMessage.getData()[0];
+                        String username2 = jsonMessage.getData()[1];
                         ChatRoom chatRoom = new ChatRoom(
                             ActiveUsers.getUser(username1),
                             ActiveUsers.getUser(username2)

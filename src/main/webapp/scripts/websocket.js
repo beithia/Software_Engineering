@@ -46,9 +46,10 @@ function sendLogout() {
         action: "logout",
 	data: [username]
     };
-}
     socket.send(JSON.stringify(DeviceAction));
     window.location.replace("index.jsp");
+}
+    
     
 function sendNewChat() {
     
