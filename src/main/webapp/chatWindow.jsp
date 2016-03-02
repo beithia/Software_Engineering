@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+        <link rel="stylesheet" type="text/css" href="css/styles.css">
         <script src="//code.jquery.com/jquery-1.10.2.js"></script>
         <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
        
@@ -21,30 +22,30 @@
         <!--%@ include file="header.html" %-->
         <div class="container"> 
             <div style="margin-top:60px;" class="mainbox col-md-7 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
-                <div class="panel panel-info " id ="draggable" style="max-height: 400px;">
+                <div class="panel panel-info " id ="draggable">
                     <div class=" panel-heading ">
-                        <div id="title" class="panel-title"> Chatting with: 
-                         <button id="close" class="btn btn-xs pull-right"style>x</button><button id="minimize" class="btn btn-xs pull-right">-</button>
+                        <div id="title" class="panel-title"> 
+                             <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Active Users  <span class="caret"></span></button>
+                         <button id="close" class="btn btn-xs pull-right">x</button><button id="minimize" class="btn btn-xs pull-right">-</button>
                         </div>
                     </div>                   
-                    <div id="chatwindow" style="padding-top:10px" class="panel-body" >
+                    <div id="chatwindow"  class="panel-body" >
                         <form id="chatform" class="form-vertical" role="form">
-                            
-                            <div id="activeusers" style="border:solid 1px; margin-top:5px; margin-bottom:5px; margin-right:10px; height:285px; max-height:285px; width:100px; overflow-y:auto" class ="panel-body col-sm-3"> 
-                            <%-- names of active users --%>
+                            <div id="groupchatlist" class ="panel-body col-sm-3"> Chatting with:
+                            <%-- names of users in group chat --%>
                             </div>   
-                            <div id ="messageArea"  style="margin-bottom:10px; height:200px; max-height:200px; overflow-y:auto">
+                            <div id ="messageArea">
                                 <%--messages will go here when user clicks send--%>
                             </div>
-                            
-                            <div style="margin-bottom: 5px" class="input-group">
+                            <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-comment"></i></span>
-                                <textarea id="message" style="resize:none" draggable="false" class="form-control" rows="2" wrap="hard"> </textarea>
-                                <span class="input-group-addon"><input id="btnSend" class = "form-control btn btn-primary" type="button" value='Send'></input> </span> 
+                                <textarea id="message" class="form-control" rows="2" wrap="hard"> </textarea>
+                                <span class="input-group-addon"><input id="btnSend" class = "form-control btn btn-primary" type="button" value='Send'></input> </span>  
                             </div>
                             <div>
-                                <input type="checkbox" id="sendOnEnter"> Send message on Enter </input>
+                                <input type="checkbox" id="sendOnEnter"> Send message on Enter </input>                                
                             </div>
+                            
                            <%-- <div style="margin-top:5px" class="input-group pull-right">
                                 <input id="btnSend" class = "form-control btn btn-primary" type="button" value='Send'></input>  
                             </div> --%>
