@@ -10,23 +10,62 @@ and open the template in the editor.
 */
 
 #draggable{
-    min-height: 350px
+    min-height: 355px;
+    height: 400px;
+    min-width: 355px;
+    //padding-bottom: 10px;
 }
 
-#activeusers{
+#chatwindow{
+    height: 90%;///
+}
+
+#chatform{
+    height: 90%;///
+}
+
+#groupchatlist{
     border:solid 1px;
-    margin-top:5px; 
-    margin-bottom:5px; 
-    margin-right:10px;  
-    max-height:285px; 
-    height: 285px;
-    width:100px; 
-    overflow-y:auto
+    //margin-top:5px; 
+    ///margin-bottom: 5px; 
+    margin-right: 10px; 
+    height: 100%;
+    width: 125px; 
+    overflow: auto;
 }
 
 #messageArea{
-    margin-bottom:10px; 
-    height:200px; 
-    max-height:200px; 
-    overflow-y:auto
+    margin-bottom: 10px; 
+   // margin-top: 5px;
+    height: 75%;  
+    overflow-y: auto;
+    word-wrap: normal;
+
+}
+
+.panel-heading{
+   // height: 10%;
+}
+#message{
+    resize: none;
+}
+//message box and send button
+.input-group{
+  
+}
+
+#minimize{
+    margin-right: 3px;
+    color:black;
+    background-color: transparent;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#close{
+    margin-left: 3px;
+    color: red;
+    background-color: transparent;
+    font-weight: bold;
+    font-size: 20px;
 }
