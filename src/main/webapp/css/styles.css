@@ -69,3 +69,49 @@ and open the template in the editor.
     font-weight: bold;
     font-size: 20px;
 }
+
+#welcomeTitle {
+    font-size:24px;
+    color:#037b58;
+    padding-bottom:50px;  
+}
+
+/*Login Window Rules */
+.uiField:focus {
+    border: solid 2px #017d5a!important;
+    box-shadow: 0 0 8px 1px #017d5a!important;
+    outline:none!important;
+}
+
+.uiField {
+    border:1px #017d5a solid;
+    color: #017d5a;
+}
+
+.input-group-addon {
+   border:1px #017d5a solid;
+}
+
+#loginTitle {
+    background-color: #017d5a;
+    color:#FFF;
+    border-color:#017d5a;
+    padding: 10px 15px;
+}
+
+.panel-info {
+    border-color: #017d5a;
+}
+
+.panel-heading {
+    background-image: linear-gradient(to bottom, #017d5a 0, #017d5a 100%)!important;
+}
+
+.uiBtn {
+    background-color: #017d5a;
+    color: #FFF
+}
+
+.glyphicon-lock, .glyphicon-user {
+    color: #017d5a;
+}

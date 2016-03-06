@@ -31,6 +31,7 @@
 </script>
 <br><br>
 <div class="container">
+    <p id="welcomeTitle"></p>
     <div id="usersDiv"></div>
     <form name="logout" id="logout" action="logout.jsp">
         <input type="hidden" id="userName" name="username"  value="">

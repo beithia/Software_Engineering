@@ -3,8 +3,9 @@ function heartbeat() {
     window.setInterval(sendHeartbeat, 1250);
  }
  
- function getName(user) {
-     alert(user);
+ function getName(user2) {
+     var user1 = document.getElementById("username").value;
+     sendNewChat(user1, user2);
  }
 
 //getUsers function. It fills div in main.jsp with the latest list of logged users.
@@ -12,6 +13,9 @@ function heartbeat() {
    var loginDiv = document.getElementById("loginDiv");
    var usersDiv = document.getElementById("usersDiv");
    var mainDiv = document.getElementById("mainDiv");
+   var loggedUser = document.getElementById("username").value;
+   var welcomeTitle = document.getElementById("welcomeTitle");
+   welcomeTitle.innerHTML = "Welcome, " + loggedUser + "!";
    //Clears the old user list to replace with new.
    while (usersDiv.hasChildNodes()) {
         usersDiv.removeChild(usersDiv.firstChild);
@@ -24,9 +28,9 @@ function heartbeat() {
         a.setAttribute("id", usersArray[i]);
         a.setAttribute("data-value", usersArray[i]);
         a.setAttribute("onclick", "getName('" + usersArray[i] + "')");
-        a.href = 'chatWindow.jsp';
+        a.href = '##';
         a.style.cssText = "text-decoration:none;font-size:24px";
-        a.innerHTML = " " + usersArray[i];
+        a.innerHTML = " " + usersArray[i] + "<br>";
         span.style.cssText = "color:#037b58;font-size:24px";
         span.className = "glyphicon glyphicon-user";
         usersDiv.appendChild(span);

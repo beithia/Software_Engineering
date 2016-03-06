@@ -15,6 +15,10 @@ function onMessage(event) {
     else if(receivedMessage.action === "heartbeat") {
         console.log(receivedMessage.data);
     }
+    else if(receivedMessage.action === "newChat") {
+        console.log(event.data);
+        //console.log(receivedMessage.id);
+    }
     
 }
 
@@ -51,9 +55,12 @@ function sendLogout() {
 }
     
     
-function sendNewChat() {
-    
-
+function sendNewChat(user1, user2) {
+    var chatUsers = {
+        action: "newChat",
+        data: [user1, user2]
+    };
+    socket.send(JSON.stringify(chatUsers));
 }
 
 

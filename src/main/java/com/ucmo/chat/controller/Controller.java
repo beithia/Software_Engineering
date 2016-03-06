@@ -59,7 +59,7 @@ public class Controller {
     @OnMessage
     public void handleMessage(String message, Session session) {
         try {
-            
+            System.out.println(message);
             JsonMessage jsonMessage = new ObjectMapper().readValue(message, JsonMessage.class);
             switch (jsonMessage.getAction()) {
                 case "heartbeat":
