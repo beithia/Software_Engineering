@@ -23,6 +23,9 @@ function heartbeat() {
    loginDiv.style.display = "none";
    mainDiv.style.display = "block";
    for(i = 0; i < usersArray.length; i++) {
+       if(usersArray[i] === loggedUser) {
+           continue;
+       }
         var a = document.createElement("a");
         var span = document.createElement("span");
         a.setAttribute("id", usersArray[i]);
