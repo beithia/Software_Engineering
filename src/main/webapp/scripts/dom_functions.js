@@ -1,6 +1,6 @@
 //Heartbeat funtion. It makes a call to the server every 5 seconds to keep connection alive.
 function heartbeat() {
-    window.setInterval(sendHeartbeat, 1250);
+    window.setInterval(sendHeartbeat, 200);
  }
  
  function getName(user2) {
@@ -15,7 +15,7 @@ function heartbeat() {
    var mainDiv = document.getElementById("mainDiv");
    var loggedUser = document.getElementById("username").value;
    var welcomeTitle = document.getElementById("welcomeTitle");
-   welcomeTitle.innerHTML = "Welcome, " + loggedUser + "!";
+   welcomeTitle.innerHTML = "Welcome, <span>" + loggedUser + "!</span>";
    //Clears the old user list to replace with new.
    while (usersDiv.hasChildNodes()) {
         usersDiv.removeChild(usersDiv.firstChild);

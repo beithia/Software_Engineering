@@ -76,6 +76,10 @@ and open the template in the editor.
     padding-bottom:50px;  
 }
 
+#welcomeTitle span {
+    color: #337ab7;
+}
+
 /*Login Window Rules */
 .uiField:focus {
     border: solid 2px #017d5a!important;
