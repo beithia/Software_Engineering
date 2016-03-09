@@ -21,34 +21,41 @@
     <body>
         <!--%@ include file="header.html" %-->
         <div class="container"> 
-            <div style="margin-top:60px;" class="mainbox col-md-7 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
-                <div class="panel panel-info " id ="draggable">
+            <div style=" padding-top: 60px;"class="mainbox col-md-7 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+                <div id ="draggable" class="panel panel-info ">
                     <div class=" panel-heading ">
                         <div id="title" class="panel-title"> 
                              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Active Users  <span class="caret"></span></button>
                          <button id="close" class="btn btn-xs pull-right">x</button><button id="minimize" class="btn btn-xs pull-right">-</button>
                         </div>
                     </div>                   
-                    <div id="chatwindow"  class="panel-body" >
+                    <div id="chatwindow" class="panel-body" >
                         <form id="chatform" class="form-vertical" role="form">
-                            <div id="groupchatlist" class ="panel-body col-sm-3"> Chatting with:
-                            <%-- names of users in group chat --%>
-                            </div>   
-                            <div id ="messageArea">
-                                <%--messages will go here when user clicks send--%>
+                            
+                            <div id="topDiv">
+                                <div id="groupchatlist" class ="panel-body col-sm-3"> Chatting with:
+                                <%-- names of users in group chat --%>
+                                </div>   
+                                <div id="left-padding">
+                                    <div id ="messageArea">
+                                        <%--messages will go here when user clicks send--%>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-comment"></i></span>
-                                <textarea id="message" class="form-control" rows="2" wrap="hard"> </textarea>
-                                <span class="input-group-addon"><input id="btnSend" class = "form-control btn btn-primary" type="button" value='Send'></input> </span>  
-                            </div>
-                            <div>
-                                <input type="checkbox" id="sendOnEnter"> Send message on Enter </input>                                
+                                    
+                            <div id="bottomDiv">
+                               <div id="topPadding">
+                                   <div class="input-group">
+                                       <span class="input-group-addon"><i class="glyphicon glyphicon-comment"></i></span>
+                                       <textarea id="message" class="form-control uiField" rows="2" wrap="hard"> </textarea>
+                                       <span class="input-group-addon"><input id="btnSend" class = "form-control btn btn-primary" type="button" value='Send'></input> </span>  
+                                   </div>
+                               </div>
+                               <div id="checkboxDiv">
+                                   <input type="checkbox" id="sendOnEnter"> Send message on Enter </input>                                
+                               </div>
                             </div>
                             
-                           <%-- <div style="margin-top:5px" class="input-group pull-right">
-                                <input id="btnSend" class = "form-control btn btn-primary" type="button" value='Send'></input>  
-                            </div> --%>
                             <script>
                                 $(document).ready(function(){
                                     $('#draggable').draggable();
