@@ -36,7 +36,7 @@
                                 <div id="groupchatlist" class ="panel-body col-sm-3"> Chatting with:
                                 <%-- names of users in group chat --%>
                                 </div>   
-                                <div id="left-padding">
+                                <div id="leftPadding">
                                     <div id ="messageArea">
                                         <%--messages will go here when user clicks send--%>
                                     </div>
@@ -71,6 +71,8 @@
                                         <%-- force messageArea div to scroll to bottom --%>
                                         var objDiv = document.getElementById("messageArea");
                                         objDiv.scrollTop = objDiv.scrollHeight;
+                                        var objDiv2 = document.getElementById("leftPadding");
+                                        objDiv2.scrollTop = objDiv.scrollHeight;
                                     }
                                 };
                                 $("#btnSend").click(addMessage);
