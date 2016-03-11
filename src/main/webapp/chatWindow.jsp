@@ -21,7 +21,7 @@
     <body>
         <!--%@ include file="header.html" %-->
         <div class="container"> 
-            <div style=" padding-top: 60px;"class="mainbox col-md-7 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+            <div style=" padding-top: 60px;" class="mainbox col-md-7 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
                 <div id ="draggable" class="panel panel-info ">
                     <div class=" panel-heading ">
                         <div id="title" class="panel-title"> 

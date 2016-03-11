@@ -128,3 +128,11 @@ and open the template in the editor.
 .glyphicon-lock, .glyphicon-user {
     color: #017d5a;
 }
+
+.fullChatWindow {
+    width:50%;
+    float:right;
+    display:none;
+    margin-right:20%;
+    margin-top:6%
+}
