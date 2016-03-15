@@ -1,13 +1,31 @@
 //Heartbeat funtion. It makes a call to the server every 5 seconds to keep connection alive.
 function heartbeat() {
-    window.setInterval(sendHeartbeat, 200);
+    window.setInterval(sendHeartbeat, 1250);
  }
  
+ function createWindow(details) {
+    var newChat = $(".clonable").clone();
+    newChat.css({
+        "display": "block", 
+        "position":"absolute", 
+        "margin-left":"30%"
+    });
+    
+    newChat.removeClass("clonable");
+    newChat.appendTo("#windows");
+    newChat.attr({id:details.id});
+    console.log("Chatting with: " + details.users[1] + "\nChatID: " + details.id);
+    $('.draggable').draggable();
+    $('.draggable').resizable();
+ }
+ 
+ function openChat(details) {
+    $(".username").click(createWindow(details));
+}
+
 function getName(user2) {
-     var chatWindow = document.getElementById("draggable");
      var user1 = document.getElementById("username").value;
-     sendNewChat(user1, user2);
-     chatWindow.style.display = "inline";  
+     sendNewChat(user1, user2); 
  }
 
 //getUsers function. It fills div in main.jsp with the latest list of logged users.
@@ -31,9 +49,9 @@ function getUsers(usersArray) {
       var a = document.createElement("a");
       var span = document.createElement("span");
       a.setAttribute("id", usersArray[i]);
+      a.setAttribute("class", "username");
       a.setAttribute("data-value", usersArray[i]);
       a.setAttribute("onclick", "getName('" + usersArray[i] + "')");
-      //a.href = '##';
       a.style.cssText = "text-decoration:none;font-size:24px;cursor:pointer";
       a.innerHTML = " " + usersArray[i] + "<br>";
       span.style.cssText = "color:#037b58;font-size:24px";
@@ -45,9 +63,10 @@ function getUsers(usersArray) {
  
 /**** Chat Window/draggable functions. ***/
 $(document).ready(function(){
-    $('#draggable').draggable();
-    $('#draggable').resizable();
+    $('.draggable').draggable();
+    $('.draggable').resizable();
 }); 
+
 //adds message from text box to messageArea div
 var addMessage = function() {
     if ($("#message").val().trim()){
@@ -70,9 +89,11 @@ $("#message").keydown(function(e){
 });
  
  
-function closeWindow() {
-    document.getElementById("draggable").style.display = "none";
- }
+/*function closeWindow() {
+ $(this).on("click", "#close", function() {
+     $(this).css("display", "none");
+ });
+}*/
  
  
 

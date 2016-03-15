@@ -16,7 +16,9 @@ function onMessage(event) {
         console.log(receivedMessage.data);
     }
     else if(receivedMessage.action === "newChat") {
-        console.log(event.data);
+        var receivedMessage = JSON.parse(event.data);
+        console.log(receivedMessage);
+        openChat(receivedMessage);
         //console.log(receivedMessage.id);
     }
     

@@ -8,7 +8,7 @@ and open the template in the editor.
     Author     : beithia
 */
 
-#draggable{
+.draggable{
     min-height: 355px;
     height: 400px;
     min-width: 355px;

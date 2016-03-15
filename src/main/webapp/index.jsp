@@ -29,11 +29,11 @@
         
  
         <!-- Chat Window -->                 
-            <div id ="draggable" class="panel panel-info fullChatWindow" style="">
+            <div class="draggable panel panel-info fullChatWindow clonable">
                 <div class=" panel-heading ">
                     <div id="title" class="panel-title"> 
                          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Active Users  <span class="caret"></span></button>
-                     <button id="close" class="btn btn-xs pull-right" onclick="closeWindow()">x</button><button id="minimize" class="btn btn-xs pull-right">-</button>
+                     <button id="close" class="btn btn-xs pull-right">x</button><button id="minimize" class="btn btn-xs pull-right">-</button>
                     </div>
                 </div>                   
                 <div id="chatwindow" class="panel-body" >
@@ -62,11 +62,10 @@
                                <input type="checkbox" id="sendOnEnter"> Send message on Enter </input>                                
                            </div>
                         </div>
-
-                        
                     </form>  
                 </div>
             </div>
+            <div id="windows"></div>
         <script type="text/javascript" src="scripts/websocket.js"></script>
         <script type="text/javascript" src="scripts/dom_functions.js"></script>
     </body>
