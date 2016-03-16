@@ -2,14 +2,15 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="css/styles.css">
-        <script src="scripts/jquery/jquery-1.12.1.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        
+        
     </head>
     <body>
         <div class="container" >
@@ -55,7 +56,7 @@
                                <div class="input-group">
                                    <span class="input-group-addon"><i class="glyphicon glyphicon-comment"></i></span>
                                    <textarea id="message" class="form-control uiField" rows="2" wrap="hard"> </textarea>
-                                   <span class="input-group-addon"><input id="btnSend" class = "form-control btn btn-primary" type="button" value='Send'></input> </span>  
+                                   <span class="input-group-addon"><input id="btnSend" class = "form-control btn btn-primary btnSend" type="button" value='Send' onclick="getId(this)"></input> </span>  
                                </div>
                            </div>
                            <div id="checkboxDiv">

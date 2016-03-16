@@ -3,22 +3,27 @@ function heartbeat() {
     window.setInterval(sendHeartbeat, 1250);
  }
  
- function createWindow(details) {
+function createWindow(details) {
     var newChat = $(".clonable").clone();
     newChat.css({
         "display": "block", 
         "position":"absolute", 
         "margin-left":"30%"
     });
-    
     newChat.removeClass("clonable");
     newChat.appendTo("#windows");
     newChat.attr({id:details.id});
+    $("#" + details.id + " #btnSend").attr('id', "btnSend-" + details.id);
     console.log("Chatting with: " + details.users[1] + "\nChatID: " + details.id);
-    $('.draggable').draggable();
-    $('.draggable').resizable();
- }
- 
+    $('.fullChatWindow').draggable();
+    $('.fullChatWindow').resizable();
+}
+
+function getId(object) {
+    alert(object.id);
+}
+
+
  function openChat(details) {
     $(".username").click(createWindow(details));
 }
@@ -62,10 +67,12 @@ function getUsers(usersArray) {
 }
  
 /**** Chat Window/draggable functions. ***/
-$(document).ready(function(){
-    $('.draggable').draggable();
-    $('.draggable').resizable();
-}); 
+//$(document).ready(function(){
+    //$('.draggable').draggable();
+    //$('.draggable').resizable();
+    //$('.fullChatWindow').draggable();
+    //$('.fullChatWindow').resizable();
+//}); 
 
 //adds message from text box to messageArea div
 var addMessage = function() {
@@ -81,19 +88,18 @@ var addMessage = function() {
         objDiv2.scrollTop = objDiv.scrollHeight;
     }
 };
-$("#btnSend").click(addMessage);
+
+
+//$("#btnSend").click(addMessage);
+
+
 $("#message").keydown(function(e){
     if (e.keyCode === 13 && $("#sendOnEnter").is(":checked")){
         addMessage();
     }
 });
- 
- 
-/*function closeWindow() {
- $(this).on("click", "#close", function() {
-     $(this).css("display", "none");
- });
-}*/
+
+
  
  
 
