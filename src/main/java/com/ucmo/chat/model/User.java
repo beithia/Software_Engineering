@@ -9,7 +9,7 @@ import javax.websocket.Session;
  * @author Jeff Trimmer
  */
 public class User implements java.io.Serializable, Comparable{
-    
+    private final long delay = 5000;
     private String username;
     private Session session;
     private Timer timer;
@@ -20,7 +20,7 @@ public class User implements java.io.Serializable, Comparable{
         this.username = userName;        
         this.session = session;
         this.timer = new Timer();
-        timer.schedule(new Logout(userName), 5000);
+        timer.schedule(new Logout(userName), delay);
     }
 
     /**
@@ -62,7 +62,7 @@ public class User implements java.io.Serializable, Comparable{
         timer.cancel();
         timer.purge();
         this.timer = new Timer();
-        timer.schedule(new Logout(username), 5000);
+        timer.schedule(new Logout(username), delay);
     }
 
     /**
