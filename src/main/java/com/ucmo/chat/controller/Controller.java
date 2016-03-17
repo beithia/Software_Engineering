@@ -94,7 +94,7 @@ public class Controller {
                     }
                 case "logout":
                     {
-                        String username = (String)jsonMessage.getData()[0];
+                        String username = jsonMessage.getData()[0];
                         ActiveUsers.removeUser(username);
                         JsonMessage send = new JsonMessage(
                                 "usernames", 
