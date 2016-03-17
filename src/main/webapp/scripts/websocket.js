@@ -28,9 +28,11 @@ function onMessage(event) {
     }
     else if(receivedMessage.action === "newChat") {
         var receivedMessage = JSON.parse(event.data);
-        console.log(receivedMessage);
         openChat(receivedMessage);
-        //console.log(receivedMessage.id);
+    }
+    else if(receivedMessage.action === "sendMessage") {
+        var receivedMessage = JSON.parse(event.data);
+        writeMessage(receivedMessage);
     }
     
 }
@@ -75,6 +77,15 @@ function sendNewChat(user1, user2) {
     };
     socket.send(JSON.stringify(chatUsers));
 }
+
+function sendMessage(username, chatroomId, chatMessage) {
+    var message = {
+        action: "sendMessage",
+        data: [username, chatroomId, chatMessage]
+    };
+    socket.send(JSON.stringify(message));
+    
+} 
 
 
 

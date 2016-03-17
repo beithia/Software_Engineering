@@ -55,8 +55,8 @@
                            <div id="topPadding">
                                <div class="input-group">
                                    <span class="input-group-addon"><i class="glyphicon glyphicon-comment"></i></span>
-                                   <textarea id="message" class="form-control uiField" rows="2" wrap="hard"> </textarea>
-                                   <span class="input-group-addon"><input id="btnSend" class = "form-control btn btn-primary btnSend" type="button" value='Send' onclick="getId(this)"></input> </span>  
+                                   <textarea id="message" class="form-control uiField" rows="2" wrap="hard"></textarea>
+                                   <span class="input-group-addon"><input id="btnSend" class = "form-control btn btn-primary btnSend" type="button" value='Send' onclick="getMessage(this)"></input> </span>  
                                </div>
                            </div>
                            <div id="checkboxDiv">

@@ -13,14 +13,25 @@ function createWindow(details) {
     newChat.removeClass("clonable");
     newChat.appendTo("#windows");
     newChat.attr({id:details.id});
+    $("#" + details.id + " #messageArea").attr('id', "messageArea-" + details.id);
     $("#" + details.id + " #btnSend").attr('id', "btnSend-" + details.id);
+    $("#" + details.id + " #message").attr('id', "message-" + details.id);
     console.log("Chatting with: " + details.users[1] + "\nChatID: " + details.id);
     $('.fullChatWindow').draggable();
     $('.fullChatWindow').resizable();
 }
 
-function getId(object) {
-    alert(object.id);
+function writeMessage(details) {
+    var messageArea = document.getElementById("messageArea-" + details.data[1]);
+    messageArea.innerHTML += "<p><strong style='color:#017D5A;margin-left:10px'>" + details.data[0] + ":</strong> " + "<strong style='color:#337AB7'>" +details.data[2] + "</strong></p>";
+    $("#message-" + details.data[1]).val("");
+}
+
+function getMessage(sendBtn) {
+    var user = $("#username").val();
+    var chatId = sendBtn.id.substr(8);
+    var message = $("#message-" + chatId).val();
+    sendMessage(user, chatId, message); 
 }
 
 
@@ -65,18 +76,10 @@ function getUsers(usersArray) {
       usersDiv.appendChild(a);
   }   
 }
- 
-/**** Chat Window/draggable functions. ***/
-//$(document).ready(function(){
-    //$('.draggable').draggable();
-    //$('.draggable').resizable();
-    //$('.fullChatWindow').draggable();
-    //$('.fullChatWindow').resizable();
-//}); 
 
 //adds message from text box to messageArea div
 var addMessage = function() {
-    if ($("#message").val().trim()){
+    if ($("#message").val().trim()) {
         var p = $("<p></p>");
         p.html("<b>You: </b>" + $("#message").val());
         $("#messageArea").append(p);
