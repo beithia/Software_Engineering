@@ -1,5 +1,16 @@
 // Create the websocket and connect to the server.
-var socket = new WebSocket("ws://localhost:8080/Chat/controller");
+var endpoint = "/Chat/controller";
+var socket = "";
+if ("WebSocket" in window){
+    if (window.location.protocol === 'http:'){
+        socket = new WebSocket("ws://" + window.location.host + endpoint);
+    } else {
+        socket = new WebSocket("wss://" + window.location.host + endpoint);
+    }
+} else {
+    // The browser doesn't support WebSocket
+    alert("WebSocket NOT supported by your Browser!");
+}
 // When a message is received call the onMessage function
 socket.onmessage = onMessage;
 

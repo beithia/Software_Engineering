@@ -24,7 +24,10 @@ public class ChatRoom {
     public void addUser(User user) {
         users.put(user.getUsername(), user);
     }
-
+    /**
+     * Removes the user from the chat room
+     * @param userName - the user to remove.
+     */
     public void removeUser(String userName) {
         users.remove(userName);
     }
@@ -57,7 +60,11 @@ public class ChatRoom {
         String[] array = messages.toArray(new String[0]);
         return array;
     }
-
+    /**
+     * Sends a text message to all the active users blocking until all of the message has been transmitted.
+     * @param message - The message to send
+     * @throws IOException - if there is a problem delivering the message.
+     */
     public void sendMessage(String message) throws IOException{
         for (Enumeration<User> e = users.elements(); e.hasMoreElements();) {
             e.nextElement().getSession().getBasicRemote().sendText(message);

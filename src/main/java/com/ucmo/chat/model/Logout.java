@@ -39,7 +39,8 @@ public class Logout extends TimerTask{
         } catch (IOException ex) {
             Logger.getLogger(Logout.class.getName()).log(Level.SEVERE, null, ex);
         }        
-        //TODO - Remove user from all active chat rooms
+        //Remove user from all active chat rooms
+        ActiveChatRooms.removeUser(username);
     }
     
 }

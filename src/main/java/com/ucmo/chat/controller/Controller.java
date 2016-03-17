@@ -65,7 +65,18 @@ public class Controller {
                 case "heartbeat":
                     {
                         String username = jsonMessage.getData()[0];
-                        ActiveUsers.getUser(username).resetTimer();
+                        if (ActiveUsers.containsUser(username)){                            
+                            ActiveUsers.getUser(username).resetTimer();
+                        } else {
+                            ActiveUsers.addUser(new User(username, session));
+                            JsonMessage send = new JsonMessage(
+                                    "usernames", 
+                                    ActiveUsers.getUsernames()
+                            );
+                            ObjectMapper objectMapper = new ObjectMapper();
+                            String strSend = objectMapper.writeValueAsString(send);
+                            ActiveUsers.broadcast(strSend);
+                        }
                         break;
                     }
                 case "login":
@@ -113,6 +124,15 @@ public class Controller {
                         String strSend = objectMapper.writeValueAsString(jsonChatRoom);
                         chatRoom.sendMessage(strSend);
                         break;
+                    }
+                case "sendMessage":
+                    {
+                        String username = jsonMessage.getData()[0];
+                        String id = jsonMessage.getData()[1];
+                        String textMessage = jsonMessage.getData()[2];
+                        ChatRoom chatRoom = ActiveChatRooms.getChatRoom(id);
+                        chatRoom.addMessage(username + ": " + textMessage);
+                        chatRoom.sendMessage(message);
                     }
                 default:
                     Logger.getLogger(Controller.class.getName()).log(
