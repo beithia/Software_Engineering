@@ -104,7 +104,7 @@ $("#message").keydown(function(e){
 
 window.onbeforeunload = function(e) {
     sendLogout();
-    return "Ha! You suck!!"
+    return undefined;
     };
 
 
