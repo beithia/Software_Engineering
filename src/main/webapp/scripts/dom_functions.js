@@ -102,6 +102,10 @@ $("#message").keydown(function(e){
     }
 });
 
+window.onbeforeunload = function(e) {
+    sendLogout();
+    };
+
 
  
  

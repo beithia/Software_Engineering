@@ -10,25 +10,6 @@
 %>
 
         
-<script>
-   /*
-     window.onbeforeunload = function(e) {
-        var userName = document.getElementById("userName").value;
-        var xhttp = new XMLHttpRequest();
-        xhttp.open("POST", "logout.jsp?userName=" + userName, true);
-        xhttp.send();
-        //response.sendRedirect("index.jsp");
-        return "This will Log you out";
-    };
-    */
-    var windowObjectReference;
-    
-
-    function openChat() {
-
-        windowObjectReference = window.open("index.jsp", "Chatting With: ", "height=400,width=600,left=600,top=300");
-    }
-</script>
 <br><br>
 <div class="container">
     <p id="welcomeTitle"></p>
