@@ -16,9 +16,17 @@ function createWindow(details) {
     $("#" + details.id + " #messageArea").attr('id', "messageArea-" + details.id);
     $("#" + details.id + " #btnSend").attr('id', "btnSend-" + details.id);
     $("#" + details.id + " #message").attr('id', "message-" + details.id);
+    $("#" + details.id + " #topDiv #groupchatlist").attr('id', "groupchatlist-" + details.id);
+    fillChattingWith(details);
     console.log("Chatting with: " + details.users[1] + "\nChatID: " + details.id);
     $('.fullChatWindow').draggable();
     $('.fullChatWindow').resizable();
+}
+
+function fillChattingWith(details) {
+    for(i = 0; i < details.users.length; i++) {
+        $("#groupchatlist-" + details.id).append("<strong style='color:#017D5A'>" + details.users[i] + "</strong><br>");
+    }
 }
 
 function writeMessage(details) {

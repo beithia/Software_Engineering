@@ -37,7 +37,7 @@ and open the template in the editor.
     overflow: auto;
     max-height: 100%;
 }
-#groupchatlist{
+.groupchatlist{
     border:solid 1px;
     width: 125px; 
     height: 100%; 
@@ -51,8 +51,10 @@ and open the template in the editor.
    word-wrap: normal;
 }
 
-#message{
+.message{
     resize: none;
+    position:relative;
+    z-index:0;
 }
 //message box and send button
 .input-group{

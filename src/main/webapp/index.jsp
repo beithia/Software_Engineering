@@ -38,10 +38,10 @@
                     </div>
                 </div>                   
                 <div id="chatwindow" class="panel-body" >
-                    <form id="chatform" class="form-vertical" role="form">
+                    <form id="chatform" class="form-vertical chatform" role="form">
 
                         <div id="topDiv">
-                            <div id="groupchatlist" class ="panel-body col-sm-3"> Chatting with:
+                            <div id="groupchatlist" class ="groupchatlist panel-body col-sm-3"> In This Chat:<br>
                             <%-- names of users in group chat --%>
                             </div>   
                             <div id="left-padding">
@@ -55,7 +55,7 @@
                            <div id="topPadding">
                                <div class="input-group">
                                    <span class="input-group-addon"><i class="glyphicon glyphicon-comment"></i></span>
-                                   <textarea id="message" class="form-control uiField" rows="2" wrap="hard"></textarea>
+                                   <textarea id="message" class="form-control uiField message" rows="2" wrap="hard"></textarea>
                                    <span class="input-group-addon"><input id="btnSend" class = "form-control btn btn-primary btnSend" type="button" value='Send' onclick="getMessage(this)"></input> </span>  
                                </div>
                            </div>
