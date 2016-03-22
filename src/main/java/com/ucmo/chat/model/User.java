@@ -1,5 +1,6 @@
 package com.ucmo.chat.model;
 
+import java.io.IOException;
 import java.util.Objects;
 import java.util.Timer;
 import javax.websocket.Session;
@@ -9,7 +10,7 @@ import javax.websocket.Session;
  * @author Jeff Trimmer
  */
 public class User implements java.io.Serializable, Comparable{
-    private final long delay = 5000000;
+    private final long delay = 300000;
     private String username;
     private Session session;
     private Timer timer;
@@ -65,6 +66,14 @@ public class User implements java.io.Serializable, Comparable{
         timer.schedule(new Logout(username), delay);
     }
 
+    /**
+     * Sends a textual message to the user
+     * @param message - the message to send.
+     * @throws java.io.IOException - if there is a problem delivering the message.
+     */
+    public void sendMessage(String message) throws IOException{
+        getSession().getBasicRemote().sendText(message);
+    }
     /**
      * Compares this object with the specified object for order. Returns a 
      * negative integer, zero, or a positive integer as this object is less 

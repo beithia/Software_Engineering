@@ -74,7 +74,7 @@ public class ActiveUsers {
      */
     public static void broadcast(String message) throws IOException{
         for (Enumeration<User> e = users.elements(); e.hasMoreElements();) {
-            e.nextElement().getSession().getBasicRemote().sendText(message);
+            e.nextElement().sendMessage(message);
         }
     }
     

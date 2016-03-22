@@ -60,8 +60,32 @@ public class Controller {
     public void handleMessage(String message, Session session) {
         try {
             System.out.println(message);
-            JsonMessage jsonMessage = new ObjectMapper().readValue(message, JsonMessage.class);
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonMessage jsonMessage = objectMapper.readValue(message, JsonMessage.class);
             switch (jsonMessage.getAction()) {
+                case "addChatUser":
+                    {
+                        String username = jsonMessage.getData()[0];
+                        String id = jsonMessage.getData()[1];
+                        User user = ActiveUsers.getUser(username);
+                        ChatRoom chatRoom = ActiveChatRooms.getChatRoom(id);
+                        JsonChatRoom jsonChatRoom = new JsonChatRoom(
+                            "newChat",
+                            chatRoom.getChatRoomID(),
+                            chatRoom.getUsernames(),
+                            chatRoom.getMessages()
+                        );
+                        String strSend = objectMapper.writeValueAsString(jsonChatRoom);
+                        user.sendMessage(strSend);                        
+                        chatRoom.addUser(user);
+                        String[] data = {username, id};
+                        JsonMessage send = new JsonMessage(
+                                "addChatUser",
+                                data
+                        );
+                        strSend =  objectMapper.writeValueAsString(send);
+                        chatRoom.sendMessage(strSend);
+                    }
                 case "heartbeat":
                     {
                         String username = jsonMessage.getData()[0];
@@ -73,7 +97,6 @@ public class Controller {
                                     "usernames", 
                                     ActiveUsers.getUsernames()
                             );
-                            ObjectMapper objectMapper = new ObjectMapper();
                             String strSend = objectMapper.writeValueAsString(send);
                             ActiveUsers.broadcast(strSend);
                         }
@@ -87,7 +110,6 @@ public class Controller {
                                 "usernames", 
                                 ActiveUsers.getUsernames()
                         );
-                        ObjectMapper objectMapper = new ObjectMapper();
                         String strSend = objectMapper.writeValueAsString(send);
                         ActiveUsers.broadcast(strSend);
                         break;
@@ -100,8 +122,8 @@ public class Controller {
                                 "usernames", 
                                 ActiveUsers.getUsernames()
                         );
-                        ObjectMapper objectMapper = new ObjectMapper();
-                        String strSend = objectMapper.writeValueAsString(send);
+                        String strSend = objectMapper.writeValueAsString(send);                        
+                        ActiveChatRooms.removeUser(username);
                         ActiveUsers.broadcast(strSend);
                         break;
                     }
@@ -120,10 +142,23 @@ public class Controller {
                             chatRoom.getUsernames(),
                             chatRoom.getMessages()
                         );
-                        ObjectMapper objectMapper = new ObjectMapper();
                         String strSend = objectMapper.writeValueAsString(jsonChatRoom);
                         chatRoom.sendMessage(strSend);
                         break;
+                    }
+                case "removeChatUser":
+                    {
+                        String username = jsonMessage.getData()[0];
+                        String id = jsonMessage.getData()[1];
+                        ChatRoom chatRoom = ActiveChatRooms.getChatRoom(id);
+                        chatRoom.removeUser(username);                        
+                        String[] data = {username, id};
+                        JsonMessage send = new JsonMessage(
+                                "removeChatUser", 
+                                data
+                        );
+                        String strSend =  objectMapper.writeValueAsString(send);
+                        chatRoom.sendMessage(strSend);
                     }
                 case "sendMessage":
                     {
