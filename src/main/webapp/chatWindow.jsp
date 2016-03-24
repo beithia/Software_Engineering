@@ -47,7 +47,7 @@
                                <div id="topPadding">
                                    <div class="input-group">
                                        <span class="input-group-addon"><i class="glyphicon glyphicon-comment"></i></span>
-                                       <textarea id="message" class="form-control uiField" rows="2" wrap="hard"> </textarea>
+                                       <textarea class="message form-control uiField" rows="2" wrap="hard"> </textarea>
                                        <span class="input-group-addon"><input id="btnSend" class = "form-control btn btn-primary" type="button" value='Send'></input> </span>  
                                    </div>
                                </div>

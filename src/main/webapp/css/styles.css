@@ -12,6 +12,9 @@ and open the template in the editor.
     min-height: 355px;
     height: 400px;
     min-width: 355px;
+    -webkit-box-shadow: 10px 11px 25px -6px rgba(0,0,0,0.77);
+    -moz-box-shadow: 10px 11px 25px -6px rgba(0,0,0,0.77);
+    box-shadow: 10px 11px 25px -6px rgba(0,0,0,0.77);
 }
 
 .panel-heading{
@@ -54,11 +57,21 @@ and open the template in the editor.
 .message{
     resize: none;
     position:relative;
-    z-index:0;
+    z-index: 0;
+}
+
+#btnSend{
+    position:relative;
+    z-index: 0;
 }
 //message box and send button
 .input-group{
-    
+   position:relative;
+   z-index: 0;
+}
+.input-group-addon{
+   position:relative;
+   z-index: 0;
 }
 
 #minimize{
