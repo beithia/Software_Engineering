@@ -17,6 +17,7 @@ function createWindow(details) {
     $("#" + details.id + " #btnSend").attr('id', "btnSend-" + details.id);
     $("#" + details.id + " #message").attr('id', "message-" + details.id);
     $("#" + details.id + " #topDiv #groupchatlist").attr('id', "groupchatlist-" + details.id);
+    $("#" + details.id + " #title #closeBtn").attr("id", "closeBtn" + details.id);
     fillChattingWith(details);
     console.log("Chatting with: " + details.users[1] + "\nChatID: " + details.id);
     $('.fullChatWindow').draggable();
@@ -83,6 +84,11 @@ function getUsers(usersArray) {
       usersDiv.appendChild(span);
       usersDiv.appendChild(a);
   }   
+}
+
+function closeWindow(details) {
+    id = details.id.substr(8);
+    $("#" + id).remove();
 }
 
 //adds message from text box to messageArea div

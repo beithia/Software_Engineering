@@ -82,13 +82,15 @@ and open the template in the editor.
     font-size: 20px;
 }
 
-#close{
+.closeBtn{
     margin-left: 3px;
     color: white;
-    background-color: transparent;
+    background-color: transparent !important;
     font-weight: bold;
     font-size: 20px;
 }
+
+.closeBtn:hover {color:red}
 
 #topPadding{
     padding-top: 10px!important;
