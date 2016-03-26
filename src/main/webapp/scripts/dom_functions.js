@@ -87,7 +87,9 @@ function getUsers(usersArray) {
 }
 
 function closeWindow(details) {
-    id = details.id.substr(8);
+    var id = details.id.substr(8);
+    var username = $("#username").val();
+    //removeChatUser(username, id);
     $("#" + id).remove();
 }
 
@@ -105,10 +107,6 @@ var addMessage = function() {
         objDiv2.scrollTop = objDiv.scrollHeight;
     }
 };
-
-
-//$("#btnSend").click(addMessage);
-
 
 $("#message").keydown(function(e){
     if (e.keyCode === 13 && $("#sendOnEnter").is(":checked")){
