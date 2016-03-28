@@ -25,8 +25,9 @@ function createWindow(details) {
 }
 
 function fillChattingWith(details) {
+    console.log(details);
     for(i = 0; i < details.users.length; i++) {
-        $("#groupchatlist-" + details.id).append("<strong style='color:#017D5A'>" + details.users[i] + "</strong><br>");
+        $("#groupchatlist-" + details.id).append("<strong id:'" + details.users[i] + "-" + details.id + "' style='color:#017D5A'>" + details.users[i] + "</strong><br>");
     }
 }
 
