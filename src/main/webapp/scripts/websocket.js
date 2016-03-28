@@ -17,6 +17,7 @@ socket.onmessage = onMessage;
 // Parses the incoming message and processes it by action
 function onMessage(event) {
     var receivedMessage = JSON.parse(event.data);
+    console.log(event.data);
     if(receivedMessage.action === "login") {
         window.location.replace("main.jsp");
     }
@@ -35,7 +36,7 @@ function onMessage(event) {
         writeMessage(receivedMessage);
     }
     else if(receivedMessage.action === "removeChatUser") {
-        //alert("User " + receivedMessage.data[0] + " removed from chat " + receivedMessage.data[1]);
+        alert("User " + receivedMessage.data[0] + " removed from chat " + receivedMessage.data[1]);
     }
 }
 
