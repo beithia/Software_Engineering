@@ -89,7 +89,7 @@ function getUsers(usersArray) {
 function closeWindow(details) {
     var id = details.id.substr(8);
     var username = $("#username").val();
-    //removeChatUser(username, id);
+    removeChatUser(username, id);
     $("#" + id).remove();
 }
 
