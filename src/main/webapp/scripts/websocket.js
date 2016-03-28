@@ -1,6 +1,7 @@
 // Create the websocket and connect to the server.
 var endpoint = "/Chat/controller";
 var socket = "";
+var loggedUsers;
 if ("WebSocket" in window){
     if (window.location.protocol === 'http:'){
         socket = new WebSocket("ws://" + window.location.host + endpoint);
@@ -22,6 +23,7 @@ function onMessage(event) {
         window.location.replace("main.jsp");
     }
     else if(receivedMessage.action === "usernames") {
+        loggedUsers = receivedMessage.data;
         getUsers(receivedMessage.data);
     }
     else if(receivedMessage.action === "heartbeat") {
