@@ -158,7 +158,7 @@ public class Controller {
                                 data
                         );
                         String strSend =  objectMapper.writeValueAsString(send);
-                        chatRoom.sendMessage(strSend);                        
+                        chatRoom.sendMessage(strSend);                      
                         break;
                     }
                 case "sendMessage":
@@ -168,7 +168,17 @@ public class Controller {
                         String textMessage = jsonMessage.getData()[2];
                         ChatRoom chatRoom = ActiveChatRooms.getChatRoom(id);
                         chatRoom.addMessage(username + ": " + textMessage);
-                        chatRoom.sendMessage(message);                        
+                        chatRoom.sendMessage(message);
+                        // temp send chat object
+                        JsonChatRoom jsonChatRoom = new JsonChatRoom(
+                            "newChatDemo",
+                            chatRoom.getChatRoomID(),
+                            chatRoom.getUsernames(),
+                            chatRoom.getMessages()
+                        );
+                        String strSend = objectMapper.writeValueAsString(jsonChatRoom);
+                        chatRoom.sendMessage(strSend);
+                        // end temp
                         break;
                     }
                 default:
