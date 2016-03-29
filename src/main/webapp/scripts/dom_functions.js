@@ -3,6 +3,7 @@ function heartbeat() {
     window.setInterval(sendHeartbeat, 1250);
  }
  
+//This function dynamically creates a new chat window.
 function createWindow(details) {
     var newChat = $(".clonable").clone();
     newChat.css({
@@ -27,7 +28,7 @@ function createWindow(details) {
 function fillChattingWith(details) {
     console.log(details);
     for(i = 0; i < details.users.length; i++) {
-        $("#groupchatlist-" + details.id).append("<strong id:'" + details.users[i] + "-" + details.id + "' style='color:#017D5A'>" + details.users[i] + "</strong><br>");
+        $("#groupchatlist-" + details.id).append("<strong id='" + details.users[i] + "-" + details.id + "' style='color:#017D5A'>" + details.users[i] + "<br></strong>");
     }
 }
 
@@ -35,6 +36,14 @@ function writeMessage(details) {
     var messageArea = document.getElementById("messageArea-" + details.data[1]);
     messageArea.innerHTML += "<p><strong style='color:#017D5A;margin-left:10px'>" + details.data[0] + ":</strong> " + "<strong style='color:#337AB7'>" +details.data[2] + "</strong></p>";
     $("#message-" + details.data[1]).val("");
+}
+
+//This function removes the user from the "In this room" div and writes to the chat window that the particular user has left the chatroom.
+function writeLogoutMsg(details) {
+    $("#groupchatlist-" + details.data[1] + " #" + details.data[0] + "-" + details.data[1]).remove();
+    var logoutMsg = "<i style='color:#CCC5C5;margin-left:10px'>" + details.data[0] + " left the room</i>";
+    var html = document.getElementById("messageArea-" + details.data[1]);
+    html.innerHTML += logoutMsg;
 }
 
 function getMessage(sendBtn) {

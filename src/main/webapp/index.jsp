@@ -41,7 +41,7 @@
                     <form id="chatform" class="form-vertical chatform" role="form">
 
                         <div id="topDiv">
-                            <div id="groupchatlist" class ="groupchatlist panel-body col-sm-3"> In This Chat:<br>
+                            <div id="groupchatlist" class ="groupchatlist panel-body col-sm-3"><strong style="color:#337AB7;text-decoration:underline"> In This Chat:</strong><br>
                             <%-- names of users in group chat --%>
                             </div>   
                             <div id="left-padding">

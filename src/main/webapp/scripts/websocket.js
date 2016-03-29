@@ -38,7 +38,8 @@ function onMessage(event) {
         writeMessage(receivedMessage);
     }
     else if(receivedMessage.action === "removeChatUser") {
-        alert("User " + receivedMessage.data[0] + " removed from chat " + receivedMessage.data[1]);
+        writeLogoutMsg(receivedMessage);
+        
     }
 }
 
