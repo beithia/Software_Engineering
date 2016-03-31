@@ -1,3 +1,4 @@
+var usersArray = [];
 //Heartbeat funtion. It makes a call to the server every 5 seconds to keep connection alive.
 function heartbeat() {
     window.setInterval(sendHeartbeat, 1250);
@@ -6,6 +7,7 @@ function heartbeat() {
 //This function dynamically creates a new chat window.
 function createWindow(details) {
     var newChat = $(".clonable").clone();
+    //console.log(details)
     newChat.css({
         "display": "block", 
         "position":"absolute", 
@@ -19,14 +21,22 @@ function createWindow(details) {
     $("#" + details.id + " #message").attr('id', "message-" + details.id);
     $("#" + details.id + " #topDiv #groupchatlist").attr('id', "groupchatlist-" + details.id);
     $("#" + details.id + " #title #closeBtn").attr("id", "closeBtn" + details.id);
+    $("#" + details.id + " #title #activeUsers").attr('id', "activeUsers-" + details.id);
+    fillActiveUsers(details.id);
     fillChattingWith(details);
     console.log("Chatting with: " + details.users[1] + "\nChatID: " + details.id);
     $('.fullChatWindow').draggable();
     $('.fullChatWindow').resizable();
 }
 
+function fillActiveUsers(id) {
+   var activeUsersContent = document.getElementById("activeUsers-" + id);
+    for(var i = 0; i < usersArray.length; i++) {
+        activeUsersContent.innerHTML += "<option id='" + usersArray[i] + "-" + id + "'>" + usersArray[i] + "</option>";
+    } 
+}
+
 function fillChattingWith(details) {
-    console.log(details);
     for(i = 0; i < details.users.length; i++) {
         $("#groupchatlist-" + details.id).append("<strong id='" + details.users[i] + "-" + details.id + "' style='color:#017D5A'>" + details.users[i] + "<br></strong>");
     }
@@ -64,7 +74,11 @@ function getName(user2) {
  }
 
 //getUsers function. It fills div in main.jsp with the latest list of logged users.
-function getUsers(usersArray) {
+function getUsers(details) {
+  for(var i = 0; i < details.length; i++) { 
+    usersArray[i] = details[i];
+  }
+  console.log(usersArray);
   var loginDiv = document.getElementById("loginDiv");
   var usersDiv = document.getElementById("usersDiv");
   var mainDiv = document.getElementById("mainDiv");
@@ -77,18 +91,18 @@ function getUsers(usersArray) {
   }
   loginDiv.style.display = "none";
   mainDiv.style.display = "block";
-  for(i = 0; i < usersArray.length; i++) {
-      if(usersArray[i] === loggedUser) {
+  for(i = 0; i < details.length; i++) {
+      if(details[i] === loggedUser) {
           continue;
       }
       var a = document.createElement("a");
       var span = document.createElement("span");
-      a.setAttribute("id", usersArray[i]);
+      a.setAttribute("id", details[i]);
       a.setAttribute("class", "username");
-      a.setAttribute("data-value", usersArray[i]);
-      a.setAttribute("onclick", "getName('" + usersArray[i] + "')");
+      a.setAttribute("data-value", details[i]);
+      a.setAttribute("onclick", "getName('" + details[i] + "')");
       a.style.cssText = "text-decoration:none;font-size:24px;cursor:pointer";
-      a.innerHTML = " " + usersArray[i] + "<br>";
+      a.innerHTML = " " + details[i] + "<br>";
       span.style.cssText = "color:#037b58;font-size:24px";
       span.className = "glyphicon glyphicon-user";
       usersDiv.appendChild(span);

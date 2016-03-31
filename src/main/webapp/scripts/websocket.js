@@ -25,6 +25,7 @@ function onMessage(event) {
     else if(receivedMessage.action === "usernames") {
         loggedUsers = receivedMessage.data;
         getUsers(receivedMessage.data);
+        fillActiveUsers(receivedMessage.data);
     }
     else if(receivedMessage.action === "heartbeat") {
         console.log(receivedMessage.data);
