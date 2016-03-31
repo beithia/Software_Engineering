@@ -22,18 +22,15 @@ function createWindow(details) {
     $("#" + details.id + " #topDiv #groupchatlist").attr('id', "groupchatlist-" + details.id);
     $("#" + details.id + " #title #closeBtn").attr("id", "closeBtn" + details.id);
     $("#" + details.id + " #title #activeUsers").attr('id', "activeUsers-" + details.id);
-    fillActiveUsers(details.id);
+    var activeUsersContent = document.getElementById("activeUsers-" + details.id);
+    activeUsersContent.innerHTML = "";
+    for(var i = 0; i < usersArray.length; i++) {
+        activeUsersContent.innerHTML += "<option id='" + usersArray[i] + "-" + i + "'>" + usersArray[i] + "</option>"; 
+    }
     fillChattingWith(details);
     console.log("Chatting with: " + details.users[1] + "\nChatID: " + details.id);
     $('.fullChatWindow').draggable();
     $('.fullChatWindow').resizable();
-}
-
-function fillActiveUsers(id) {
-   var activeUsersContent = document.getElementById("activeUsers-" + id);
-    for(var i = 0; i < usersArray.length; i++) {
-        activeUsersContent.innerHTML += "<option id='" + usersArray[i] + "-" + id + "'>" + usersArray[i] + "</option>";
-    } 
 }
 
 function fillChattingWith(details) {

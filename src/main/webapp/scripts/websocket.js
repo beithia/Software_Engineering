@@ -25,8 +25,13 @@ function onMessage(event) {
     else if(receivedMessage.action === "usernames") {
         loggedUsers = receivedMessage.data;
         getUsers(receivedMessage.data);
-        fillActiveUsers(receivedMessage.data);
-    }
+        $(".activeUsers").each(function() {
+            $(this).empty();
+            for(var i = 0; i < loggedUsers.length; i++) {
+                $(this).append("<option id='" + loggedUsers[i] + "-" + i + "'>" + loggedUsers[i] + "</option>");
+            }
+        });
+    } 
     else if(receivedMessage.action === "heartbeat") {
         console.log(receivedMessage.data);
     }

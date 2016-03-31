@@ -33,7 +33,7 @@
             <div class="draggable panel panel-info fullChatWindow clonable">
                 <div class=" panel-heading ">
                     <div id="title" class="panel-title"> 
-                         <select id="activeUsers" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                         <select id="activeUsers" class="activeUsers btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
                              <option>Active Users <span class="caret"></span></option>
                          </select>
                          <button id="closeBtn" class="closeBtn btn btn-xs pull-right" onclick="closeWindow(this)">x</button><button id="minimize" class="btn btn-xs pull-right">-</button>
