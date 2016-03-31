@@ -36,6 +36,7 @@
                          <select id="activeUsers" class="activeUsers btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
                              <option>Active Users <span class="caret"></span></option>
                          </select>
+                         <button id="addUser" class="btn btn-default" type="button">Add User to Group</button>
                          <button id="closeBtn" class="closeBtn btn btn-xs pull-right" onclick="closeWindow(this)">x</button><button id="minimize" class="btn btn-xs pull-right">-</button>
                     </div>
                 </div>                   
