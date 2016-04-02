@@ -6,8 +6,10 @@ function heartbeat() {
  
 //This function dynamically creates a new chat window.
 function createWindow(details) {
+    var top = parseInt((Math.random() * 125 + 100));
+    var left = parseInt((Math.random() * 50));
+    var right = parseInt((Math.random() * 50));
     var newChat = $(".clonable").clone();
-    //console.log(details)
     newChat.css({
         "display": "block", 
         "position":"absolute", 
@@ -16,12 +18,14 @@ function createWindow(details) {
     newChat.removeClass("clonable");
     newChat.appendTo("#windows");
     newChat.attr({id:details.id});
+    $("#" + details.id).css({"top":top, "left":left, "right":right, "border":"2px solid #E0E0E0", "z-index":"0"});
     $("#" + details.id + " #messageArea").attr('id', "messageArea-" + details.id);
     $("#" + details.id + " #btnSend").attr('id', "btnSend-" + details.id);
     $("#" + details.id + " #message").attr('id', "message-" + details.id);
     $("#" + details.id + " #topDiv #groupchatlist").attr('id', "groupchatlist-" + details.id);
     $("#" + details.id + " #title #closeBtn").attr("id", "closeBtn" + details.id);
     $("#" + details.id + " #title #activeUsers").attr('id', "activeUsers-" + details.id);
+    $("#" + details.id + " #title #addUser").attr('id', "addUser-" + details.id);
     var activeUsersContent = document.getElementById("activeUsers-" + details.id);
     activeUsersContent.innerHTML = "";
     for(var i = 0; i < usersArray.length; i++) {
