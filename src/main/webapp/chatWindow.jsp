@@ -26,7 +26,8 @@
                     <div class=" panel-heading ">
                         <div id="title" class="panel-title"> 
                              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Active Users  <span class="caret"></span></button>
-                         <button id="close" class="btn btn-xs pull-right">x</button><button id="minimize" class="btn btn-xs pull-right">-</button>
+                             <button id="addUser" class="btn btn-default" type="button">Add User</button>
+                             <button id="close" class="btn btn-xs pull-right">x</button><button id="minimize" class="btn btn-xs pull-right">-</button>
                         </div>
                     </div>                   
                     <div id="chatwindow" class="panel-body" >
