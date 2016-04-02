@@ -13,12 +13,16 @@ function createWindow(details) {
     newChat.css({
         "display": "block", 
         "position":"absolute", 
-        "margin-left":"30%"
+        "margin-left":"30%",
+        "top":top, 
+        "left":left, 
+        "right":right, 
+        "border":"2px solid #E0E0E0", 
+        "z-index":"0"
     });
     newChat.removeClass("clonable");
     newChat.appendTo("#windows");
     newChat.attr({id:details.id});
-    $("#" + details.id).css({"top":top, "left":left, "right":right, "border":"2px solid #E0E0E0", "z-index":"0"});
     $("#" + details.id + " #messageArea").attr('id', "messageArea-" + details.id);
     $("#" + details.id + " #btnSend").attr('id', "btnSend-" + details.id);
     $("#" + details.id + " #message").attr('id', "message-" + details.id);
