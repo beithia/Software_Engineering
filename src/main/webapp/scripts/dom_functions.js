@@ -41,6 +41,7 @@ function createWindow(details) {
     $('.fullChatWindow').resizable();
 }
 
+//Fills the "In This Chat" div with the names of the users in the chat room.
 function fillChattingWith(details) {
     for(i = 0; i < details.users.length; i++) {
         $("#groupchatlist-" + details.id).append("<strong id='" + details.users[i] + "-" + details.id + "' style='color:#017D5A'>" + details.users[i] + "<br></strong>");
