@@ -39,17 +39,19 @@
                          </select>
                          <button id="addUser" class="addUser btn btn-default" type="button" onclick="addUserToChat(this)">Add</button>
                          <button id="closeBtn" class="closeBtn btn btn-xs pull-right" onclick="closeWindow(this)">x</button><button id="minimize" class="btn btn-xs pull-right">-</button>
+                         <button id="addUser" class="addUserStyle btn btn-default" type="button">Add</button>
+                         <button id="closeBtn" class="closeBtnStyle btn btn-xs pull-right" onclick="closeWindow(this)">x</button><button id="minimize" class="btn btn-xs pull-right">-</button>
                     </div>
                 </div>                   
                 <div id="chatwindow" class="panel-body" >
                     <form id="chatform" class="form-vertical chatform" role="form">
 
                         <div id="topDiv">
-                            <div id="groupchatlist" class ="groupchatlist panel-body col-sm-3"><strong style="color:#337AB7;text-decoration:underline"> In This Chat:</strong><br>
+                            <div id="groupchatlist" class ="groupchatlistStyle panel-body col-sm-3"><strong style="color:#337AB7;text-decoration:underline"> In This Chat:</strong><br>
                             <%-- names of users in group chat --%>
                             </div>   
                             <div id="left-padding">
-                                <div id ="messageArea">
+                                <div id ="messageArea" class="messageAreaStyle">
                                     <%--messages will go here when user clicks send--%>
                                 </div>
                             </div>
@@ -59,8 +61,8 @@
                            <div id="topPadding">
                                <div class="input-group">
                                    <span class="input-group-addon"><i class="glyphicon glyphicon-comment"></i></span>
-                                   <textarea id="message" class="form-control uiField message" rows="2" wrap="hard"></textarea>
-                                   <span class="input-group-addon"><input id="btnSend" class = "form-control btn btn-primary btnSend" type="button" value='Send' onclick="getMessage(this)"></input> </span>  
+                                   <textarea id="message" class="form-control uiField messageStyle" rows="2" wrap="hard"></textarea>
+                                   <span class="input-group-addon"><input id="btnSend" class = "form-control btn btn-primary btnSendStyle" type="button" value='Send' onclick="getMessage(this)"></input> </span>  
                                </div>
                            </div>
                            <div id="checkboxDiv">
