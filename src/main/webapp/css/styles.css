@@ -8,6 +8,10 @@ and open the template in the editor.
     Author     : beithia
 */
 
+.whiteText {
+    color:#FFF!important;
+}
+
 .draggable{
     min-height: 355px;
     height: 400px;

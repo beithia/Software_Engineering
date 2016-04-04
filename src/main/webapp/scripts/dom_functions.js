@@ -17,7 +17,7 @@ function createWindow(details) {
         "top":top, 
         "left":left, 
         "right":right, 
-        "border":"2px solid #E0E0E0", 
+        "border":"1px solid #000", 
         "z-index":"0"
     });
     newChat.removeClass("clonable");
@@ -60,6 +60,11 @@ function writeLogoutMsg(details) {
     var logoutMsg = "<i style='color:#CCC5C5;margin-left:10px'>" + details.data[0] + " left the room</i>";
     var html = document.getElementById("messageArea-" + details.data[1]);
     html.innerHTML += logoutMsg;
+}
+
+function addUserToChat(btnDetails) {
+    var id = btnDetails.id.substr(8);
+    var username = $("#activeUsers-" + id).val();
 }
 
 function getMessage(sendBtn) {
