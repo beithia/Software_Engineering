@@ -39,8 +39,6 @@
                          </select>
                          <button id="addUser" class="addUser btn btn-default" type="button" onclick="addUserToChat(this)">Add</button>
                          <button id="closeBtn" class="closeBtn btn btn-xs pull-right" onclick="closeWindow(this)">x</button><button id="minimize" class="btn btn-xs pull-right">-</button>
-                         <button id="addUser" class="addUserStyle btn btn-default" type="button">Add</button>
-                         <button id="closeBtn" class="closeBtnStyle btn btn-xs pull-right" onclick="closeWindow(this)">x</button><button id="minimize" class="btn btn-xs pull-right">-</button>
                     </div>
                 </div>                   
                 <div id="chatwindow" class="panel-body" >

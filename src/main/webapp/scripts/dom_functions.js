@@ -64,6 +64,7 @@ function writeLogoutMsg(details) {
 function addUserToChat(btnDetails) {
     var id = btnDetails.id.substr(8);
     var username = $("#activeUsers-" + id).val();
+    addChatUser(username, id);
 }
 
 function getMessage(sendBtn) {

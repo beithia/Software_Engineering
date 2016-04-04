@@ -44,7 +44,10 @@ function onMessage(event) {
         writeMessage(receivedMessage);
     }
     else if(receivedMessage.action === "removeChatUser") {
-        writeLogoutMsg(receivedMessage);
+        writeLogoutMsg(receivedMessage); 
+    }
+    else if(receivedMessage.action === "addChatUser") {
+        $("#groupchatlist-" + receivedMessage.data[1]).append("<strong style='color:#017D5A;'>" + receivedMessage.data[0] + "</strong><br>");
         
     }
 }
@@ -104,6 +107,14 @@ function removeChatUser(username, chatId) {
         data: [username, chatId]
     };
     socket.send(JSON.stringify(message));  
+}
+
+function addChatUser(username, id) {
+    var message = {
+        action: "addChatUser",
+        data: [username, id]
+    };
+    socket.send(JSON.stringify(message));
 }
 
 
