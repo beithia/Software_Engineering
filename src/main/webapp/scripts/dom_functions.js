@@ -154,9 +154,11 @@ window.onbeforeunload = function(e) {
     return undefined;
     };
 
-
- 
- 
+//bring chat window to front when clicked
+/*$(".fullChatWindow").click(function(){
+    $(".front").removeClass("front");
+    $(this).addClass("front");
+});*/
 
 
 

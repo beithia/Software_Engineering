@@ -8,6 +8,12 @@ and open the template in the editor.
     Author     : beithia
 */
 
+.front{
+    position: relative !important;
+    z-index:100 !important; 
+    
+}
+
 .whiteText {
     color:#FFF!important;
 }
@@ -151,6 +157,7 @@ btnSendStyle{
 }
 
 .fullChatWindow {
+    position: absolute!important; 
     width:50%;
     float:right;
     display:none;
