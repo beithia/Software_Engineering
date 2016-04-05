@@ -30,7 +30,7 @@ public class Logout extends TimerTask{
     @Override
     public void run() {        
         ActiveUsers.removeUser(username);
-        System.out.println(username + " Logged out");
+        System.out.println(username + " Timed out");
         JsonMessage send = new JsonMessage("usernames", ActiveUsers.getUsernames());
         ObjectMapper objectMapper = new ObjectMapper();
         try {

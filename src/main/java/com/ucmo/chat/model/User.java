@@ -28,6 +28,7 @@ public class User implements java.io.Serializable, Comparable{
      * Returns the user username
      * @return the userName
      */
+    
     public String getUsername() {
         return username;
     }
@@ -57,13 +58,21 @@ public class User implements java.io.Serializable, Comparable{
     }
 
     /**
-     * Resets the timer delay to 5 seconds.
+     * Resets the timer delay.
      */
     public void resetTimer() {
         timer.cancel();
         timer.purge();
         this.timer = new Timer();
         timer.schedule(new Logout(username), delay);
+    }
+    
+    /**
+     * Cancels the current timer
+     */
+    public void cancelTimer(){
+        timer.cancel();
+        timer.purge();
     }
 
     /**

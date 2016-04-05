@@ -36,7 +36,7 @@ function createWindow(details) {
         activeUsersContent.innerHTML += "<option id='" + usersArray[i] + "-" + i + "'>" + usersArray[i] + "</option>"; 
     }
     fillChattingWith(details);
-    console.log("Chatting with: " + details.users[1] + "\nChatID: " + details.id);
+    //console.log("Chatting with: " + details.users[1] + "\nChatID: " + details.id);
     $('.fullChatWindow').draggable();
     $('.fullChatWindow').resizable();
 }
@@ -89,7 +89,7 @@ function getUsers(details) {
   for(var i = 0; i < details.length; i++) { 
     usersArray[i] = details[i];
   }
-  console.log(usersArray);
+  //console.log(usersArray);
   var loginDiv = document.getElementById("loginDiv");
   var usersDiv = document.getElementById("usersDiv");
   var mainDiv = document.getElementById("mainDiv");

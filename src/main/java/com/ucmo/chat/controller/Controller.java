@@ -59,7 +59,9 @@ public class Controller {
     @OnMessage
     public void handleMessage(String message, Session session) {
         try {
-            System.out.println(message);
+            if (!message.contains("heartbeat")) {
+                System.out.println(message);
+            }            
             ObjectMapper objectMapper = new ObjectMapper();
             JsonMessage jsonMessage = objectMapper.readValue(message, JsonMessage.class);
             switch (jsonMessage.getAction()) {
@@ -117,13 +119,17 @@ public class Controller {
                 case "logout":
                     {
                         String username = jsonMessage.getData()[0];
+                        ActiveUsers.getUser(username).cancelTimer();
+                        String[] IDs = ActiveChatRooms.removeUser(username);
+                        for (int i=0; i < IDs.length; i++){                            
+                            removeChatUser(username, IDs[i]);
+                        }
                         ActiveUsers.removeUser(username);
                         JsonMessage send = new JsonMessage(
                                 "usernames", 
                                 ActiveUsers.getUsernames()
                         );
-                        String strSend = objectMapper.writeValueAsString(send);                        
-                        ActiveChatRooms.removeUser(username);
+                        String strSend = objectMapper.writeValueAsString(send);
                         ActiveUsers.broadcast(strSend);
                         break;
                     }
@@ -150,15 +156,7 @@ public class Controller {
                     {
                         String username = jsonMessage.getData()[0];
                         String id = jsonMessage.getData()[1];
-                        ChatRoom chatRoom = ActiveChatRooms.getChatRoom(id);
-                        chatRoom.removeUser(username);
-                        String[] data = {username, id};
-                        JsonMessage send = new JsonMessage(
-                                "removeChatUser",
-                                data
-                        );
-                        String strSend =  objectMapper.writeValueAsString(send);
-                        chatRoom.sendMessage(strSend);
+                        removeChatUser(username, id);
                         break;
                     }
                 case "sendMessage":
@@ -182,5 +180,28 @@ public class Controller {
         } catch (IOException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);         
         }
+    }
+    
+    /**
+     * Removes the given user from the chat room with the given id
+     * @param username - the user to remove
+     * @param id - the id of the chat room
+     * @throws IOException 
+     */
+    private void removeChatUser(String username, String id) throws IOException{
+        
+        ObjectMapper objectMapper = new ObjectMapper();
+        ChatRoom chatRoom = ActiveChatRooms.getChatRoom(id);
+        chatRoom.removeUser(username);
+        if (chatRoom.isEmpty()){
+            ActiveChatRooms.removeChatRoom(id);
+        }
+        String[] data = {username, id};
+        JsonMessage send = new JsonMessage(
+                "removeChatUser",
+                data
+        );
+        String strSend =  objectMapper.writeValueAsString(send);
+        chatRoom.sendMessage(strSend);
     }
 }
