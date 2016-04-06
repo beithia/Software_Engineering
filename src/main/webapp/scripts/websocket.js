@@ -49,7 +49,7 @@ function onMessage(event) {
         
     }
     else if(receivedMessage.action === "addChatUser") {
-        $("#groupchatlist-" + receivedMessage.data[1]).append("<strong style='color:#017D5A;'>" + receivedMessage.data[0] + "</strong><br>");   
+        $("#groupchatlist-" + receivedMessage.data[1]).append("<strong id=" + receivedMessage.data[0] + "-" + receivedMessage.data[1] + " style='color:#017D5A;'>" + receivedMessage.data[0] + "<br></strong>");   
     }
 }
 
