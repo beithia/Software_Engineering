@@ -55,7 +55,7 @@ function writeMessage(details) {
 
 //This function removes the user from the "In this room" div and writes to the chat window that the particular user has left the chatroom.
 function writeLogoutMsg(details) {
-    var logoutMsg = "<i style='color:#CCC5C5;margin-left:10px'>" + details.data[0] + " left the room</i>";
+    var logoutMsg = "<p style='color:#CCC5C5;margin-left:10px'><i>" + details.data[0] + " left the room</i></p>";
     var html = document.getElementById("messageArea-" + details.data[1]);
     html.innerHTML += logoutMsg;
 }
