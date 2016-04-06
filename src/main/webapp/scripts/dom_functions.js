@@ -1,9 +1,33 @@
 var usersArray = [];
-//Heartbeat funtion. It makes a call to the server every 5 seconds to keep connection alive.
-function heartbeat() {
-    window.setInterval(sendHeartbeat, 1250);
- }
- 
+
+//adds message from text box to messageArea div
+var addMessage = function() {
+    if ($("#message").val().trim()) {
+        var p = $("<p></p>");
+        p.html("<b>You: </b>" + $("#message").val());
+        $("#messageArea").append(p);
+        $("#message").val("");
+        //force messageArea div to scroll to bottom
+        var objDiv = document.getElementById("messageArea");
+        objDiv.scrollTop = objDiv.scrollHeight;
+        var objDiv2 = document.getElementById("leftPadding");
+        objDiv2.scrollTop = objDiv.scrollHeight;
+    }
+};
+
+function addUserToChat(btnDetails) {
+    var id = btnDetails.id.substr(8);
+    var username = $("#activeUsers-" + id).val();
+    addChatUser(username, id);
+}
+
+function closeWindow(details) {
+    var id = details.id.substr(8);
+    var username = $("#username").val();
+    removeChatUser(username, id);
+    $("#" + id).remove();
+}
+
 //This function dynamically creates a new chat window.
 function createWindow(details) {
     var top = parseInt((Math.random() * 125 + 100));
@@ -36,7 +60,6 @@ function createWindow(details) {
         activeUsersContent.innerHTML += "<option id='" + usersArray[i] + "-" + i + "'>" + usersArray[i] + "</option>"; 
     }
     fillChattingWith(details);
-    //console.log("Chatting with: " + details.users[1] + "\nChatID: " + details.id);
     $('.fullChatWindow').draggable();
     $('.fullChatWindow').resizable();
 }
@@ -47,25 +70,6 @@ function fillChattingWith(details) {
     }
 }
 
-function writeMessage(details) {
-    var messageArea = document.getElementById("messageArea-" + details.data[1]);
-    messageArea.innerHTML += "<p><strong style='color:#017D5A;margin-left:10px'>" + details.data[0] + ":</strong> " + "<strong style='color:#337AB7'>" +details.data[2] + "</strong></p>";
-    $("#message-" + details.data[1]).val("");
-}
-
-//This function removes the user from the "In this room" div and writes to the chat window that the particular user has left the chatroom.
-function writeLogoutMsg(details) {
-    var logoutMsg = "<p style='color:#CCC5C5;margin-left:10px'><i>" + details.data[0] + " left the room</i></p>";
-    var html = document.getElementById("messageArea-" + details.data[1]);
-    html.innerHTML += logoutMsg;
-}
-
-function addUserToChat(btnDetails) {
-    var id = btnDetails.id.substr(8);
-    var username = $("#activeUsers-" + id).val();
-    addChatUser(username, id);
-}
-
 function getMessage(sendBtn) {
     var user = $("#username").val();
     var chatId = sendBtn.id.substr(8);
@@ -73,16 +77,11 @@ function getMessage(sendBtn) {
     sendMessage(user, chatId, message); 
 }
 
-
- function openChat(details) {
-    $(".username").click(createWindow(details));
-}
-
 function getName(user2) {
      var user1 = document.getElementById("username").value;
      sendNewChat(user1, user2); 
  }
-
+ 
 //getUsers function. It fills div in main.jsp with the latest list of logged users.
 function getUsers(details) {
   for(var i = 0; i < details.length; i++) { 
@@ -120,38 +119,45 @@ function getUsers(details) {
   }   
 }
 
-function closeWindow(details) {
-    var id = details.id.substr(8);
-    var username = $("#username").val();
-    removeChatUser(username, id);
-    $("#" + id).remove();
+//Heartbeat funtion. It makes a call to the server every 5 seconds to keep connection alive.
+function heartbeat() {
+    window.setInterval(sendHeartbeat, 1250);
+ }
+ 
+ //Logs uses out if they navigate away from the page.
+ window.onbeforeunload = function(e) {
+    sendLogout();
+    return undefined;
+};
+
+function openChat(details) {
+   $(".username").click(createWindow(details));
 }
 
-//adds message from text box to messageArea div
-var addMessage = function() {
-    if ($("#message").val().trim()) {
-        var p = $("<p></p>");
-        p.html("<b>You: </b>" + $("#message").val());
-        $("#messageArea").append(p);
-        $("#message").val("");
-        //force messageArea div to scroll to bottom
-        var objDiv = document.getElementById("messageArea");
-        objDiv.scrollTop = objDiv.scrollHeight;
-        var objDiv2 = document.getElementById("leftPadding");
-        objDiv2.scrollTop = objDiv.scrollHeight;
-    }
-};
+function writeJoinRoomMsg(details) {
+    var joinMsg = "<p style='color:#CCC5C5;margin-left:10px'><i>" + details.data[0] + " joined the room</i></p>";
+    var html = document.getElementById("messageArea-" + details.data[1]);
+    html.innerHTML += joinMsg;
+}
+
+//This function removes the user from the "In this room" div and writes to the chat window that the particular user has left the chatroom.
+function writeLeftRoomMsg(details) {
+    var logoutMsg = "<p style='color:#CCC5C5;margin-left:10px'><i>" + details.data[0] + " left the room</i></p>";
+    var html = document.getElementById("messageArea-" + details.data[1]);
+    html.innerHTML += logoutMsg;
+}
+
+function writeMessage(details) {
+    var messageArea = document.getElementById("messageArea-" + details.data[1]);
+    messageArea.innerHTML += "<p><strong style='color:#017D5A;margin-left:10px'>" + details.data[0] + ":</strong> " + "<strong style='color:#337AB7'>" +details.data[2] + "</strong></p>";
+    $("#message-" + details.data[1]).val("");
+}
 
 $("#message").keydown(function(e){
     if (e.keyCode === 13 && $("#sendOnEnter").is(":checked")){
         addMessage();
     }
 });
-
-window.onbeforeunload = function(e) {
-    sendLogout();
-    return undefined;
-    };
 
 //bring chat window to front when clicked
 /*$(".fullChatWindow").click(function(){

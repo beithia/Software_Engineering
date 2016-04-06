@@ -45,11 +45,13 @@ function onMessage(event) {
     }
     else if(receivedMessage.action === "removeChatUser") {
         $("#groupchatlist-" + receivedMessage.data[1] + " #" + receivedMessage.data[0] + "-" + receivedMessage.data[1]).remove();
-        writeLogoutMsg(receivedMessage);
+        writeLeftRoomMsg(receivedMessage);
         
     }
     else if(receivedMessage.action === "addChatUser") {
+        writeJoinRoomMsg(receivedMessage);
         $("#groupchatlist-" + receivedMessage.data[1]).append("<strong id=" + receivedMessage.data[0] + "-" + receivedMessage.data[1] + " style='color:#017D5A;'>" + receivedMessage.data[0] + "<br></strong>");   
+        
     }
 }
 

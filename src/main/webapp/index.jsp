@@ -9,8 +9,7 @@
         <link rel="stylesheet" href="css/styles.css">
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-        
-        
+        <link rel='shortcut icon' href='images/favicon.ico' type='images/x-icon'/ > 
     </head>
     <body>
         <div class="container" >
