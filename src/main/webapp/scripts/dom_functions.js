@@ -160,7 +160,7 @@ $("#message").keydown(function(e){
 });
 
 //bring chat window to front when clicked
-/*$(".fullChatWindow").click(function(){
+    /*$(".fullChatWindow").click(function(){
     $(".front").removeClass("front");
     $(this).addClass("front");
 });*/

@@ -11,7 +11,6 @@ and open the template in the editor.
 .front{
     position: relative !important;
     z-index:100 !important; 
-    
 }
 
 .whiteText {
@@ -58,8 +57,11 @@ and open the template in the editor.
 }
 
 .messageAreaStyle{
-   height: 100%;  
-   max-height: 100%;
+   position: absolute !important;
+   top: 70px;
+   left: 140px;
+   height: calc(100% - 170px); 
+   width: calc(100% - 145px);
    overflow: auto;
    word-wrap: normal;
 }
