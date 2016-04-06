@@ -81,7 +81,9 @@ public class User implements java.io.Serializable, Comparable{
      * @throws java.io.IOException - if there is a problem delivering the message.
      */
     public void sendMessage(String message) throws IOException{
-        getSession().getBasicRemote().sendText(message);
+        if (session.isOpen()){
+            session.getBasicRemote().sendText(message);
+        }
     }
     /**
      * Compares this object with the specified object for order. Returns a 
