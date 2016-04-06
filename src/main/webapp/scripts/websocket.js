@@ -44,11 +44,12 @@ function onMessage(event) {
         writeMessage(receivedMessage);
     }
     else if(receivedMessage.action === "removeChatUser") {
-        writeLogoutMsg(receivedMessage); 
+        $("#groupchatlist-" + receivedMessage.data[1] + " #" + receivedMessage.data[0] + "-" + receivedMessage.data[1]).remove();
+        writeLogoutMsg(receivedMessage);
+        
     }
     else if(receivedMessage.action === "addChatUser") {
-        $("#groupchatlist-" + receivedMessage.data[1]).append("<strong style='color:#017D5A;'>" + receivedMessage.data[0] + "</strong><br>");
-        
+        $("#groupchatlist-" + receivedMessage.data[1]).append("<strong style='color:#017D5A;'>" + receivedMessage.data[0] + "</strong><br>");   
     }
 }
 
