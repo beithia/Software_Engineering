@@ -53,13 +53,14 @@ function createWindow(details) {
     $("#" + details.id + " #topDiv #groupchatlist").attr('id', "groupchatlist-" + details.id);
     $("#" + details.id + " #title #closeBtn").attr("id", "closeBtn" + details.id);
     $("#" + details.id + " #title #activeUsers").attr('id', "activeUsers-" + details.id);
-    $("#" + details.id + " #title #addUser").attr('id', "addUser-" + details.id);
-    var activeUsersContent = document.getElementById("activeUsers-" + details.id);
-    activeUsersContent.innerHTML = "";
-    for(var i = 0; i < usersArray.length; i++) {
-        activeUsersContent.innerHTML += "<option id='" + usersArray[i] + "-" + i + "'>" + usersArray[i] + "</option>"; 
-    }
+//    $("#" + details.id + " #title #addUser").attr('id', "addUser-" + details.id);
+//    var activeUsersContent = document.getElementById("activeUsers-" + details.id);
+//    activeUsersContent.innerHTML = "";
+//    for(var i = 0; i < usersArray.length; i++) {
+//        activeUsersContent.innerHTML += "<option id='" + usersArray[i] + "-" + i + "'>" + usersArray[i] + "</option>"; 
+//    }
     fillChattingWith(details);
+    fillActiveUsers(details.id);
     $('.fullChatWindow').draggable();
     $('.fullChatWindow').resizable();
     
@@ -70,9 +71,23 @@ function createWindow(details) {
 });
 }
 
+function fillActiveUsers(id){
+    var chatUsers = [];
+    $("#groupchatlist-" + id + " p").each(function(){
+        chatUsers.push($(this).text());
+    });
+    var activeUsersContent = document.getElementById("activeUsers-" + id);
+    activeUsersContent.innerHTML = "";
+    for(var i = 0; i < usersArray.length; i++) {
+        if (true){
+            activeUsersContent.innerHTML += "<option id='" + usersArray[i] + "-" + i + "'>" + usersArray[i] + "</option>";
+        }
+    }    
+}
+
 function fillChattingWith(details) {
     for(i = 0; i < details.users.length; i++) {
-        $("#groupchatlist-" + details.id).append("<strong id='" + details.users[i] + "-" + details.id + "' style='color:#017D5A'>" + details.users[i] + "<br></strong>");
+        $("#groupchatlist-" + details.id).append("<p><strong id='" + details.users[i] + "-" + details.id + "' style='color:#017D5A'>" + details.users[i] + "<br></strong></p>");
     }
 }
 
