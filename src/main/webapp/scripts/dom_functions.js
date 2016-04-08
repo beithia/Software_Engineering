@@ -62,6 +62,12 @@ function createWindow(details) {
     fillChattingWith(details);
     $('.fullChatWindow').draggable();
     $('.fullChatWindow').resizable();
+    
+    $(".fullChatWindow").click(function(){
+    $(".front").removeClass("front");
+    $(this).addClass("front");
+    
+});
 }
 
 function fillChattingWith(details) {
@@ -159,11 +165,6 @@ $("#message").keydown(function(e){
     }
 });
 
-//bring chat window to front when clicked
-    /*$(".fullChatWindow").click(function(){
-    $(".front").removeClass("front");
-    $(this).addClass("front");
-});*/
 
 
 
