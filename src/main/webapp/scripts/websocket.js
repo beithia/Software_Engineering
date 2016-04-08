@@ -26,7 +26,8 @@ function onMessage(event) {
         loggedUsers = receivedMessage.data;
         getUsers(receivedMessage.data);
         $(".activeUsers").each(function() {
-            $(this).empty();
+            console.log($(this.id.substr(12)));
+            $(this.id).empty();
             for(var i = 0; i < loggedUsers.length; i++) {
                 $(this).append("<option id='" + loggedUsers[i] + "-" + i + "'>" + loggedUsers[i] + "</option>");
             }

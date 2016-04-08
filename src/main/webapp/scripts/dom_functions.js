@@ -76,13 +76,24 @@ function fillActiveUsers(id){
     $("#groupchatlist-" + id + " p").each(function(){
         chatUsers.push($(this).text());
     });
+    console.log("chatUsers Array: " + chatUsers);
+    console.log("activeUsers Array: " + usersArray);
     var activeUsersContent = document.getElementById("activeUsers-" + id);
     activeUsersContent.innerHTML = "";
     for(var i = 0; i < usersArray.length; i++) {
-        if (true){
+        if (!contains(usersArray[i], chatUsers)){
             activeUsersContent.innerHTML += "<option id='" + usersArray[i] + "-" + i + "'>" + usersArray[i] + "</option>";
         }
     }    
+}
+
+function contains(a, b) {
+    for (var i = 0; i < b.length; i++) {
+        if (a == b[i]) {
+            return true;
+        }
+    }
+    return false;
 }
 
 function fillChattingWith(details) {
