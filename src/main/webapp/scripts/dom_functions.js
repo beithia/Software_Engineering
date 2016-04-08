@@ -63,7 +63,7 @@ function createWindow(details) {
     $('.fullChatWindow').draggable();
     $('.fullChatWindow').resizable();
     
-    $(".fullChatWindow").click(function(){
+    $(".fullChatWindow").mousedown(function(){
     $(".front").removeClass("front");
     $(this).addClass("front");
     
