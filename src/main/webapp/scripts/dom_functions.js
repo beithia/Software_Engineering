@@ -53,12 +53,6 @@ function createWindow(details) {
     $("#" + details.id + " #topDiv #groupchatlist").attr('id', "groupchatlist-" + details.id);
     $("#" + details.id + " #title #closeBtn").attr("id", "closeBtn" + details.id);
     $("#" + details.id + " #title #activeUsers").attr('id', "activeUsers-" + details.id);
-//    $("#" + details.id + " #title #addUser").attr('id', "addUser-" + details.id);
-//    var activeUsersContent = document.getElementById("activeUsers-" + details.id);
-//    activeUsersContent.innerHTML = "";
-//    for(var i = 0; i < usersArray.length; i++) {
-//        activeUsersContent.innerHTML += "<option id='" + usersArray[i] + "-" + i + "'>" + usersArray[i] + "</option>"; 
-//    }
     fillChattingWith(details);
     fillActiveUsers(details.id);
     $('.fullChatWindow').draggable();

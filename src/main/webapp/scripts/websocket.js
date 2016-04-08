@@ -26,11 +26,7 @@ function onMessage(event) {
         loggedUsers = receivedMessage.data;
         getUsers(receivedMessage.data);
         $(".activeUsers").each(function() {
-            console.log($(this.id.substr(12)));
-            $(this.id).empty();
-            for(var i = 0; i < loggedUsers.length; i++) {
-                $(this).append("<option id='" + loggedUsers[i] + "-" + i + "'>" + loggedUsers[i] + "</option>");
-            }
+            fillActiveUsers($(this).attr("id").substr(12));
         });
     } 
     else if(receivedMessage.action === "heartbeat") {
