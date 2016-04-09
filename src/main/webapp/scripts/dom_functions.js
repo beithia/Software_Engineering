@@ -185,10 +185,6 @@ function writeMessage(user, id, message) {
     var test = $(".front textarea");
 }
 
-$(".front textarea").keypress(function(e) {
-    
-});
-
 $("body").delegate(".front textarea", "keydown", function(e){
     if (e.keyCode === 13 && $(".front #sendOnEnter").is(":checked")) {
         var id = $(this).attr("id");
