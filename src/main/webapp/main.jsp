@@ -20,7 +20,7 @@
     </form>
     <br><br>
     <p id="test"></p>
-    <button class="btn btn-danger" name="logout" id="logout" onclick="sendLogout()">Logout</button>
+    <button class="btn btn-danger" name="logout" id="logout" onclick="window.location.replace('index.jsp');">Logout</button>
 </div>
                 
    

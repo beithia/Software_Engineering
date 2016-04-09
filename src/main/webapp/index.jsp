@@ -59,11 +59,11 @@
                                <div class="input-group">
                                    <span class="input-group-addon"><i class="glyphicon glyphicon-comment"></i></span>
                                    <textarea id="message" class="form-control uiField messageStyle" rows="2" wrap="hard"></textarea>
-                                   <span class="input-group-addon"><input id="btnSend" class = "form-control btn btn-primary btnSendStyle" type="button" value='Send' onclick="getMessage(this)"></input> </span>  
+                                   <span class="input-group-addon"><input id="btnSend" class = "form-control btn btn-primary btnSendStyle" type="button" value='Send' onclick="getMessage($(this).attr('id'))"></input> </span>  
                                </div>
                            </div>
                            <div id="checkboxDiv">
-                               <input type="checkbox" id="sendOnEnter"> Send message on Enter </input>                                
+                               <input type="checkbox" id="sendOnEnter"> Send message on Enter                                
                            </div>
                         </div>
                     </form>  

@@ -1,7 +1,5 @@
-/* global loggedUsers */
-
-var usersArray = [];
-
+/* global loggedUsers, sendHeartbeat */
+var timer;
 //adds message from text box to messageArea div
 var addMessage = function() {
     if ($("#message").val().trim()) {
@@ -30,6 +28,15 @@ function closeWindow(details) {
     $("#" + id).remove();
 }
 
+function contains(a, b) {
+    for (var i = 0; i < b.length; i++) {
+        if (a === b[i]) {
+            return true;
+        }
+    }
+    return false;
+}
+
 //This function dynamically creates a new chat window.
 function createWindow(details) {
     var top = parseInt((Math.random() * 125 + 100));
@@ -54,12 +61,13 @@ function createWindow(details) {
     $("#" + details.id + " #message").attr('id', "message-" + details.id);
     $("#" + details.id + " #topDiv #groupchatlist").attr('id', "groupchatlist-" + details.id);
     $("#" + details.id + " #title #closeBtn").attr("id", "closeBtn" + details.id);
+    $("#" + details.id + " #title #addUser").attr("id", "addUser-" + details.id);
     $("#" + details.id + " #title #activeUsers").attr('id', "activeUsers-" + details.id);
     fillChattingWith(details);
     fillActiveUsers(details.id);
+    fillChatMessages(details);
     $('.fullChatWindow').draggable();
     $('.fullChatWindow').resizable();
-    
     $(".fullChatWindow").mousedown(function(){
     $(".front").removeClass("front");
     $(this).addClass("front");
@@ -69,11 +77,9 @@ function createWindow(details) {
 
 function fillActiveUsers(id){
     var chatUsers = [];
-    $("#groupchatlist-" + id + " p").each(function(){
+    $("#groupchatlist-" + id + " span").each(function(){
         chatUsers.push($(this).text());
     });
-    console.log("chatUsers Array: " + chatUsers);
-    console.log("activeUsers Array: " + loggedUsers);
     var activeUsersContent = document.getElementById("activeUsers-" + id);
     if (activeUsersContent !== null){
         activeUsersContent.innerHTML = "";
@@ -85,24 +91,23 @@ function fillActiveUsers(id){
     }
 }
 
-function contains(a, b) {
-    for (var i = 0; i < b.length; i++) {
-        if (a === b[i]) {
-            return true;
-        }
-    }
-    return false;
-}
-
 function fillChattingWith(details) {
     for(i = 0; i < details.users.length; i++) {
-        $("#groupchatlist-" + details.id).append("<p><strong id='" + details.users[i] + "-" + details.id + "' style='color:#017D5A'>" + details.users[i] + "<br></strong></p>");
+        $("#groupchatlist-" + details.id).append("<span><strong id='" + details.users[i] + "-" + details.id + "' style='color:#017D5A'>" + details.users[i] + "<br></strong></span>");
     }
 }
 
-function getMessage(sendBtn) {
+function fillChatMessages(details) {
+    for(i = 0; i < details.messages.length; i++) {
+        var splitMsg = [];
+        splitMsg = details.messages[i].split(": " );
+        writeMessage(splitMsg[0], details.id, splitMsg[1]);
+    }
+}
+
+function getMessage(id) {
     var user = $("#username").val();
-    var chatId = sendBtn.id.substr(8);
+    var chatId = id.substr(8);
     var message = $("#message-" + chatId).val();
     sendMessage(user, chatId, message); 
 }
@@ -114,10 +119,6 @@ function getName(user2) {
  
 //getUsers function. It fills div in main.jsp with the latest list of logged users.
 function getUsers(details) {
-  for(var i = 0; i < details.length; i++) { 
-    usersArray[i] = details[i];
-  }
-  //console.log(usersArray);
   var loginDiv = document.getElementById("loginDiv");
   var usersDiv = document.getElementById("usersDiv");
   var mainDiv = document.getElementById("mainDiv");
@@ -151,7 +152,7 @@ function getUsers(details) {
 
 //Heartbeat funtion. It makes a call to the server every 5 seconds to keep connection alive.
 function heartbeat() {
-    window.setInterval(sendHeartbeat, 1250);
+   timer = window.setInterval(sendHeartbeat, 30000);
  }
  
  //Logs uses out if they navigate away from the page.
@@ -177,15 +178,21 @@ function writeLeftRoomMsg(details) {
     html.innerHTML += logoutMsg;
 }
 
-function writeMessage(details) {
-    var messageArea = document.getElementById("messageArea-" + details.data[1]);
-    messageArea.innerHTML += "<p><strong style='color:#017D5A;margin-left:10px'>" + details.data[0] + ":</strong> " + "<strong style='color:#337AB7'>" +details.data[2] + "</strong></p>";
-    $("#message-" + details.data[1]).val("");
+function writeMessage(user, id, message) {
+    var messageArea = document.getElementById("messageArea-" + id);
+    messageArea.innerHTML += "<p style='margin-left:10px'><strong style='color:#017D5A;'>" + user + ":</strong> " + "<strong style='color:#337AB7'>" + message + "</strong></p>";
+    $("#message-" + id).val("");
+    var test = $(".front textarea");
 }
 
-$("#message").keydown(function(e){
-    if (e.keyCode === 13 && $("#sendOnEnter").is(":checked")){
-        addMessage();
+$(".front textarea").keypress(function(e) {
+    
+});
+
+$("body").delegate(".front textarea", "keydown", function(e){
+    if (e.keyCode === 13 && $(".front #sendOnEnter").is(":checked")) {
+        var id = $(this).attr("id");
+        getMessage(id);
     }
 });
 

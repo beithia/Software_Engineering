@@ -23,7 +23,6 @@ function onMessage(event) {
         window.location.replace("main.jsp");
     }
     else if(receivedMessage.action === "usernames") {
-        loggedUsers = new Array();
         loggedUsers = receivedMessage.data;
         getUsers(receivedMessage.data);
         $(".activeUsers").each(function() {
@@ -39,17 +38,17 @@ function onMessage(event) {
     }
     else if(receivedMessage.action === "sendMessage") {
         var receivedMessage = JSON.parse(event.data);
-        writeMessage(receivedMessage);
+        writeMessage(receivedMessage.data[0], receivedMessage.data[1], receivedMessage.data[2] );
     }
     else if(receivedMessage.action === "removeChatUser") {
         $("#groupchatlist-" + receivedMessage.data[1] + " #" + receivedMessage.data[0] + "-" + receivedMessage.data[1]).remove();
         writeLeftRoomMsg(receivedMessage);
-        
+        fillActiveUsers(receivedMessage.data[1]); 
     }
     else if(receivedMessage.action === "addChatUser") {
         writeJoinRoomMsg(receivedMessage);
-        $("#groupchatlist-" + receivedMessage.data[1]).append("<strong id=" + receivedMessage.data[0] + "-" + receivedMessage.data[1] + " style='color:#017D5A;'>" + receivedMessage.data[0] + "<br></strong>");   
-        
+        $("#groupchatlist-" + receivedMessage.data[1]).append("<span><strong id=" + receivedMessage.data[0] + "-" + receivedMessage.data[1] + " style='color:#017D5A;'>" + receivedMessage.data[0] + "<br></strong></span>");   
+        fillActiveUsers(receivedMessage.data[1]);
     }
 }
 
@@ -81,8 +80,8 @@ function sendLogout() {
         action: "logout",
 	data: [username]
     };
+    clearInterval(timer);
     socket.send(JSON.stringify(DeviceAction));
-    window.location.replace("index.jsp");
 }
         
 function sendNewChat(user1, user2) {

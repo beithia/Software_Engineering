@@ -10,7 +10,7 @@ import javax.websocket.Session;
  * @author Jeff Trimmer
  */
 public class User implements java.io.Serializable, Comparable{
-    private final long delay = 60000;
+    private final long delay = 600000;
     private String username;
     private Session session;
     private Timer timer;
