@@ -59,9 +59,7 @@ public class Controller {
     @OnMessage
     public void handleMessage(String message, Session session) {
         try {
-            if (!message.contains("heartbeat")) {
-                System.out.println(message);
-            }            
+            System.out.println(message);
             ObjectMapper objectMapper = new ObjectMapper();
             JsonMessage jsonMessage = objectMapper.readValue(message, JsonMessage.class);
             switch (jsonMessage.getAction()) {
@@ -94,36 +92,24 @@ public class Controller {
                         if (ActiveUsers.containsUser(username)){                            
                             ActiveUsers.getUser(username).resetTimer();
                         } else {
-                            ActiveUsers.addUser(new User(username, session));
-                            JsonMessage send = new JsonMessage(
-                                    "usernames", 
-                                    ActiveUsers.getUsernames()
-                            );
-                            String strSend = objectMapper.writeValueAsString(send);
-                            ActiveUsers.broadcast(strSend);
+                            login(username, session);
                         }
                         break;
                     }
                 case "login":
                     {
                         String username = jsonMessage.getData()[0];
-                        ActiveUsers.addUser(new User(username, session));
-                        JsonMessage send = new JsonMessage(
-                                "usernames", 
-                                ActiveUsers.getUsernames()
-                        );
-                        String strSend = objectMapper.writeValueAsString(send);
-                        ActiveUsers.broadcast(strSend);
+                        login(username, session);
                         break;
                     }
                 case "logout":
                     {
                         String username = jsonMessage.getData()[0];
-                        ActiveUsers.getUser(username).cancelTimer();
                         String[] IDs = ActiveChatRooms.removeUser(username);
                         for (int i=0; i < IDs.length; i++){                            
                             removeChatUser(username, IDs[i]);
-                        }
+                        }                        
+                        ActiveUsers.getUser(username).cancelTimer();
                         ActiveUsers.removeUser(username);
                         JsonMessage send = new JsonMessage(
                                 "usernames", 
@@ -183,10 +169,26 @@ public class Controller {
     }
     
     /**
+     * Creates a new user, adds them to the collection of online users, and updates all clients.
+     * @param username - the user to login
+     * @param session - the user's session
+     * @throws IOException
+     */
+    private void login(String username, Session session) throws IOException{
+        ObjectMapper objectMapper = new ObjectMapper();
+        ActiveUsers.addUser(new User(username, session));
+        JsonMessage send = new JsonMessage(
+                "usernames", 
+                ActiveUsers.getUsernames()
+        );
+        String strSend = objectMapper.writeValueAsString(send);
+        ActiveUsers.broadcast(strSend);
+    }
+    /**
      * Removes the given user from the chat room with the given id
      * @param username - the user to remove
      * @param id - the id of the chat room
-     * @throws IOException 
+     * @throws IOException
      */
     private void removeChatUser(String username, String id) throws IOException{
         
@@ -195,6 +197,7 @@ public class Controller {
         chatRoom.removeUser(username);
         if (chatRoom.isEmpty()){
             ActiveChatRooms.removeChatRoom(id);
+            return;
         }
         String[] data = {username, id};
         JsonMessage send = new JsonMessage(

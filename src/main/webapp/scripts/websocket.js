@@ -23,6 +23,7 @@ function onMessage(event) {
         window.location.replace("main.jsp");
     }
     else if(receivedMessage.action === "usernames") {
+        loggedUsers = new Array();
         loggedUsers = receivedMessage.data;
         getUsers(receivedMessage.data);
         $(".activeUsers").each(function() {

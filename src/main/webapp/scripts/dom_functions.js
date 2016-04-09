@@ -1,3 +1,5 @@
+/* global loggedUsers */
+
 var usersArray = [];
 
 //adds message from text box to messageArea div
@@ -71,19 +73,21 @@ function fillActiveUsers(id){
         chatUsers.push($(this).text());
     });
     console.log("chatUsers Array: " + chatUsers);
-    console.log("activeUsers Array: " + usersArray);
+    console.log("activeUsers Array: " + loggedUsers);
     var activeUsersContent = document.getElementById("activeUsers-" + id);
-    activeUsersContent.innerHTML = "";
-    for(var i = 0; i < usersArray.length; i++) {
-        if (!contains(usersArray[i], chatUsers)){
-            activeUsersContent.innerHTML += "<option id='" + usersArray[i] + "-" + i + "'>" + usersArray[i] + "</option>";
-        }
-    }    
+    if (activeUsersContent !== null){
+        activeUsersContent.innerHTML = "";
+        for(var i = 0; i < loggedUsers.length; i++) {
+            if (!contains(loggedUsers[i], chatUsers)){
+                activeUsersContent.innerHTML += "<option id='" + loggedUsers[i] + "-" + i + "'>" + loggedUsers[i] + "</option>";
+            }
+        }    
+    }
 }
 
 function contains(a, b) {
     for (var i = 0; i < b.length; i++) {
-        if (a == b[i]) {
+        if (a === b[i]) {
             return true;
         }
     }
