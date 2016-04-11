@@ -29,6 +29,7 @@ and open the template in the editor.
 .panel-heading{
     height: 55px;
 }
+
 #chatwindow{
     height: calc(100% - 70px);
 }
@@ -146,7 +147,7 @@ btnSendStyle{
 }
 
 .panel-heading {
-    background-image: linear-gradient(to bottom, #017d5a 0, #017d5a 100%)!important;
+  background-image: linear-gradient(to bottom, #017d5a 0, #017d5a 100%)!important;
 }
 
 .uiBtn {

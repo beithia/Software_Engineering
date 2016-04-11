@@ -193,6 +193,14 @@ function writeMessage(user, id, message) {
     $("#message-" + id).val("");
     var test = $(".front textarea");
     scrollToBottom(id);
+    
+    //changes div color when message is written to messageArea
+    $(".panel-heading").attr("style", "background-image: linear-gradient(to bottom, #63FF69 0, #63FF69 100%) !important");
+    
+    //changes color of panel-heading back to original when chatWindow is clicked
+    $(".fullChatWindow").mousedown(function(){
+    $(".panel-heading").attr("style", "background-image: linear-gradient(to bottom, #017d5a 0, #017d5a 100%) !important");
+    });
 }
 
 $("body").delegate(".front textarea", "keydown", function(e){
