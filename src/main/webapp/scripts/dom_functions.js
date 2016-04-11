@@ -8,9 +8,9 @@ var addMessage = function() {
         $("#messageArea").append(p);
         $("#message").val("");
         //force messageArea div to scroll to bottom
-        var objDiv = document.getElementById("messageArea");
+        var objDiv = document.getElementById(".messageAreaStyle");
         objDiv.scrollTop = objDiv.scrollHeight;
-        var objDiv2 = document.getElementById("leftPadding");
+        var objDiv2 = document.getElementById("left-padding");
         objDiv2.scrollTop = objDiv.scrollHeight;
     }
 };
@@ -165,10 +165,18 @@ function openChat(details) {
    $(".username").click(createWindow(details));
 }
 
+function scrollToBottom(id){
+    var objDiv = document.getElementById("messageArea-" + id);
+    objDiv.scrollTop = objDiv.scrollHeight;
+    var objDiv2 = document.getElementById("left-padding");
+    objDiv2.scrollTop = objDiv.scrollHeight;
+}
+
 function writeJoinRoomMsg(details) {
     var joinMsg = "<p style='color:#CCC5C5;margin-left:10px'><i>" + details.data[0] + " joined the room</i></p>";
     var html = document.getElementById("messageArea-" + details.data[1]);
     html.innerHTML += joinMsg;
+    scrollToBottom(details.data[1]);
 }
 
 //This function removes the user from the "In this room" div and writes to the chat window that the particular user has left the chatroom.
@@ -176,6 +184,7 @@ function writeLeftRoomMsg(details) {
     var logoutMsg = "<p style='color:#CCC5C5;margin-left:10px'><i>" + details.data[0] + " left the room</i></p>";
     var html = document.getElementById("messageArea-" + details.data[1]);
     html.innerHTML += logoutMsg;
+    scrollToBottom(details.data[1]);
 }
 
 function writeMessage(user, id, message) {
@@ -183,6 +192,7 @@ function writeMessage(user, id, message) {
     messageArea.innerHTML += "<p style='margin-left:10px'><strong style='color:#017D5A;'>" + user + ":</strong> " + "<strong style='color:#337AB7'>" + message + "</strong></p>";
     $("#message-" + id).val("");
     var test = $(".front textarea");
+    scrollToBottom(id);
 }
 
 $("body").delegate(".front textarea", "keydown", function(e){
