@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="css/styles.css">
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-        <link rel='shortcut icon' href='images/favicon.ico' type='images/x-icon'/ > 
+        <link rel='shortcut icon' href='images/favicon.ico' type='images/x-icon' /> 
     </head>
     <body>
         <div class="container" >
@@ -33,7 +33,7 @@
                 <div class=" panel-heading ">
                     <div id="title" class="panel-title"> 
                         <span class="whiteText">Active Users: </span>
-                         <select id="activeUsers" class="activeUsers btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                         <select id="activeUsers" class="activeUsers btn btn-default dropdown-toggle" data-toggle="dropdown">
                              <option>Active Users <span class="caret"></span></option>
                          </select>
                          <button id="addUser" class="addUser btn btn-default" type="button" onclick="addUserToChat(this)">Add</button>
