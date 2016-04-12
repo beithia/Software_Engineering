@@ -1,19 +1,6 @@
 /* global loggedUsers, sendHeartbeat */
 var timer;
-//adds message from text box to messageArea div
-var addMessage = function() {
-    if ($("#message").val().trim()) {
-        var p = $("<p></p>");
-        p.html("<b>You: </b>" + $("#message").val());
-        $("#messageArea").append(p);
-        $("#message").val("");
-        //force messageArea div to scroll to bottom
-        var objDiv = document.getElementById(".messageAreaStyle");
-        objDiv.scrollTop = objDiv.scrollHeight;
-        var objDiv2 = document.getElementById("left-padding");
-        objDiv2.scrollTop = objDiv.scrollHeight;
-    }
-};
+
 
 function addUserToChat(btnDetails) {
     var id = btnDetails.id.substr(8);
@@ -187,19 +174,22 @@ function writeLeftRoomMsg(details) {
     scrollToBottom(details.data[1]);
 }
 
+//Writes messages to the chat
 function writeMessage(user, id, message) {
     var messageArea = document.getElementById("messageArea-" + id);
     messageArea.innerHTML += "<p style='margin-left:10px'><strong style='color:#017D5A;'>" + user + ":</strong> " + "<strong style='color:#337AB7'>" + message + "</strong></p>";
     $("#message-" + id).val("");
-    var test = $(".front textarea");
     scrollToBottom(id);
     
     //changes div color when message is written to messageArea
-    $(".panel-heading").attr("style", "background-image: linear-gradient(to bottom, #63FF69 0, #63FF69 100%) !important");
-    
+    //var test = $("#" + id).hasClass("front");
+    //alert(test);
+    if(!$("#" + id).hasClass("front")) {
+        $("#" + id + " .panel-heading").attr("style", "background-image: linear-gradient(to bottom, #bbe86f 0, #bbe86f 100%) !important");
+    }
     //changes color of panel-heading back to original when chatWindow is clicked
-    $(".fullChatWindow").mousedown(function(){
-    $(".panel-heading").attr("style", "background-image: linear-gradient(to bottom, #017d5a 0, #017d5a 100%) !important");
+    $("#" + id).mousedown(function(){
+    $("#" + id + " .panel-heading").attr("style", "background-image: linear-gradient(to bottom, #017d5a 0, #017d5a 100%) !important");
     });
 }
 
