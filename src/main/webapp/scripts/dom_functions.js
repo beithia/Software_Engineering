@@ -49,11 +49,11 @@ function createWindow(details) {
     $("#" + details.id + " #title #closeBtn").attr("id", "closeBtn" + details.id);
     $("#" + details.id + " #title #addUser").attr("id", "addUser-" + details.id);
     $("#" + details.id + " #title #activeUsers").attr('id', "activeUsers-" + details.id);
+    $("#" + details.id).draggable();
+    $("#" + details.id).resizable();
     fillChattingWith(details);
     fillActiveUsers(details.id);
     fillChatMessages(details);
-    $('.fullChatWindow').draggable();
-    $('.fullChatWindow').resizable();
     $(".fullChatWindow").mousedown(function(){
     $(".front").removeClass("front");
     $(this).addClass("front");
