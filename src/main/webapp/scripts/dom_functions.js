@@ -96,6 +96,7 @@ function getMessage(id) {
     var chatId = id.substr(8);
     var message = $("#message-" + chatId).val();
     sendMessage(user, chatId, message); 
+    $("#message-" + id).val("");
 }
 
 function getName(user2) {
@@ -177,12 +178,9 @@ function writeLeftRoomMsg(details) {
 function writeMessage(user, id, message) {
     var messageArea = document.getElementById("messageArea-" + id);
     messageArea.innerHTML += "<p style='margin-left:10px'><strong style='color:#017D5A;'>" + user + ":</strong> " + "<strong style='color:#337AB7'>" + message + "</strong></p>";
-    $("#message-" + id).val("");
     scrollToBottom(id);
     
     //changes div color when message is written to messageArea
-    //var test = $("#" + id).hasClass("front");
-    //alert(test);
     if(!$("#" + id).hasClass("front")) {
         $("#" + id + " .panel-heading").attr("style", "background-image: linear-gradient(to bottom, #bbe86f 0, #bbe86f 100%) !important");
     }
