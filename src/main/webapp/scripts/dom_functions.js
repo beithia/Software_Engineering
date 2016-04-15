@@ -194,7 +194,7 @@ function writeMessage(user, id, message) {
     });
 }
 
-$("body").delegate(".front textarea", "keydown", function(e){
+$("body").delegate(".front textarea", "keyup", function(e){
     if (e.keyCode === 13 && $(".front #sendOnEnter").is(":checked")) {
         var id = $(this).attr("id");
         getMessage(id);
