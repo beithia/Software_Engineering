@@ -61,6 +61,10 @@ function createWindow(details) {
 });
 }
 
+function escape( myid ) { 
+    return myid.replace(/[!"#$%&'()*+,.\/ :;<=>?@[\\\]^`{|}~]/g, "_");
+}
+
 function fillActiveUsers(id){
     var chatUsers = [];
     $("#groupchatlist-" + id + " span").each(function(){
@@ -79,7 +83,7 @@ function fillActiveUsers(id){
 
 function fillChattingWith(details) {
     for(i = 0; i < details.users.length; i++) {
-        $("#groupchatlist-" + details.id).append("<span><strong id='" + details.users[i] + "-" + details.id + "' style='color:#017D5A'>" + details.users[i] + "<br></strong></span>");
+        $("#groupchatlist-" + details.id).append("<span><strong id='" + escape(details.users[i]) + "-" + details.id + "' style='color:#017D5A'>" + details.users[i] + "<br></strong></span>");
     }
 }
 
@@ -95,8 +99,8 @@ function getMessage(id) {
     var user = $("#username").val();
     var chatId = id.substr(8);
     var message = $("#message-" + chatId).val();
+    $("#message-" + chatId).val("");
     sendMessage(user, chatId, message); 
-    $("#message-" + id).val("");
 }
 
 function getName(user2) {

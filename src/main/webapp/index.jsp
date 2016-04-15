@@ -63,7 +63,7 @@
                                </div>
                            </div>
                            <div id="checkboxDiv">
-                               <input type="checkbox" id="sendOnEnter"> Send message on Enter                                
+                               <input type="checkbox" id="sendOnEnter" checked> Send message on Enter                                
                            </div>
                         </div>
                     </form>  
