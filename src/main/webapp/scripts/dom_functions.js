@@ -1,7 +1,8 @@
 /* global loggedUsers, sendHeartbeat */
 var timer;
 
-function addUserToChat(btnDetails) {
+//This function adds a user from the dropdown list to the chat.
+function addUserToChat(btnDetails)  {
     var id = btnDetails.id.substr(8);
     var username = $("#activeUsers-" + id).val();
     console.log(username);
