@@ -4,7 +4,10 @@ var timer;
 function addUserToChat(btnDetails) {
     var id = btnDetails.id.substr(8);
     var username = $("#activeUsers-" + id).val();
-    addChatUser(username, id);
+    console.log(username);
+    if(username != null) {
+        addChatUser(username, id);
+    }
 }
 
 function closeWindow(details) {
