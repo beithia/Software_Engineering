@@ -83,7 +83,7 @@ function sendLogout() {
     clearInterval(timer);
     socket.send(JSON.stringify(DeviceAction));
 }
-        
+
 function sendNewChat(user1, user2) {
     var chatUsers = {
         action: "newChat",
@@ -98,7 +98,6 @@ function sendMessage(username, chatroomId, chatMessage) {
         data: [username, chatroomId, chatMessage]
     };
     socket.send(JSON.stringify(message));
-    
 }
 
 function removeChatUser(username, chatId) {
